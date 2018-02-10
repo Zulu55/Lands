@@ -1,6 +1,7 @@
 ﻿namespace Lands.Models
 {
     using System.Collections.Generic;
+    using Newtonsoft.Json;
 
     public class Land
     {
