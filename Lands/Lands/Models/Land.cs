@@ -5,76 +5,76 @@
 
     public class Land
     {
-        [JsonProperty(PropertyName = "acronym")]
-        public string name { get; set; }
+        [JsonProperty(PropertyName = "name")]
+        public string Name { get; set; }
 
-        [JsonProperty(PropertyName = "acronym")]
-        public List<string> topLevelDomain { get; set; }
+        [JsonProperty(PropertyName = "topLevelDomain")]
+        public List<string> TopLevelDomain { get; set; }
 
-        [JsonProperty(PropertyName = "acronym")]
-        public string alpha2Code { get; set; }
+        [JsonProperty(PropertyName = "alpha2Code")]
+        public string Alpha2Code { get; set; }
 
-        [JsonProperty(PropertyName = "acronym")]
-        public string alpha3Code { get; set; }
+        [JsonProperty(PropertyName = "alpha3Code")]
+        public string Alpha3Code { get; set; }
 
-        [JsonProperty(PropertyName = "acronym")]
-        public List<string> callingCodes { get; set; }
+        [JsonProperty(PropertyName = "callingCodes")]
+        public List<string> CallingCodes { get; set; }
 
-        [JsonProperty(PropertyName = "acronym")]
-        public string capital { get; set; }
+        [JsonProperty(PropertyName = "capital")]
+        public string Capital { get; set; }
 
-        [JsonProperty(PropertyName = "acronym")]
-        public List<string> altSpellings { get; set; }
+        [JsonProperty(PropertyName = "altSpellings")]
+        public List<string> AltSpellings { get; set; }
 
-        [JsonProperty(PropertyName = "acronym")]
-        public string region { get; set; }
+        [JsonProperty(PropertyName = "region")]
+        public string Region { get; set; }
 
-        [JsonProperty(PropertyName = "acronym")]
-        public string subregion { get; set; }
+        [JsonProperty(PropertyName = "subregion")]
+        public string Subregion { get; set; }
 
-        [JsonProperty(PropertyName = "acronym")]
-        public int population { get; set; }
+        [JsonProperty(PropertyName = "population")]
+        public int Population { get; set; }
 
-        [JsonProperty(PropertyName = "acronym")]
-        public List<int> latlng { get; set; }
+        [JsonProperty(PropertyName = "latlng")]
+        public List<double> Latlng { get; set; }
 
-        [JsonProperty(PropertyName = "acronym")]
-        public string demonym { get; set; }
+        [JsonProperty(PropertyName = "demonym")]
+        public string Demonym { get; set; }
 
-        [JsonProperty(PropertyName = "acronym")]
-        public int area { get; set; }
+        [JsonProperty(PropertyName = "area")]
+        public double? Area { get; set; }
 
-        [JsonProperty(PropertyName = "acronym")]
-        public double gini { get; set; }
+        [JsonProperty(PropertyName = "gini")]
+        public double? Gini { get; set; }
 
-        [JsonProperty(PropertyName = "acronym")]
-        public List<string> timezones { get; set; }
+        [JsonProperty(PropertyName = "timezones")]
+        public List<string> Timezones { get; set; }
 
-        [JsonProperty(PropertyName = "acronym")]
-        public List<string> borders { get; set; }
+        [JsonProperty(PropertyName = "borders")]
+        public List<string> Borders { get; set; }
 
-        [JsonProperty(PropertyName = "acronym")]
-        public string nativeName { get; set; }
+        [JsonProperty(PropertyName = "nativeName")]
+        public string NativeName { get; set; }
 
-        [JsonProperty(PropertyName = "acronym")]
-        public string numericCode { get; set; }
+        [JsonProperty(PropertyName = "numericCode")]
+        public string NumericCode { get; set; }
 
-        [JsonProperty(PropertyName = "acronym")]
-        public List<Currency> currencies { get; set; }
+        [JsonProperty(PropertyName = "currencies")]
+        public List<Currency> Currencies { get; set; }
 
-        [JsonProperty(PropertyName = "acronym")]
-        public List<Language> languages { get; set; }
+        [JsonProperty(PropertyName = "languages")]
+        public List<Language> Languages { get; set; }
 
-        [JsonProperty(PropertyName = "acronym")]
-        public Translations translations { get; set; }
+        [JsonProperty(PropertyName = "translations")]
+        public Translations Translations { get; set; }
 
-        [JsonProperty(PropertyName = "acronym")]
-        public string flag { get; set; }
+        [JsonProperty(PropertyName = "flag")]
+        public string Flag { get; set; }
 
-        [JsonProperty(PropertyName = "acronym")]
-        public List<RegionalBloc> regionalBlocs { get; set; }
+        [JsonProperty(PropertyName = "regionalBlocs")]
+        public List<RegionalBloc> RegionalBlocs { get; set; }
 
-        [JsonProperty(PropertyName = "acronym")]
-        public string cioc { get; set; }
+        [JsonProperty(PropertyName = "cioc")]
+        public string Cioc { get; set; }
     }
 }
