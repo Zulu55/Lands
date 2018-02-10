@@ -9,7 +9,7 @@
 		{
 			InitializeComponent();
 
-			this.MainPage = new LoginPage();
+			this.MainPage = new NavigationPage(new LoginPage());
 		}
 
 		protected override void OnStart ()
