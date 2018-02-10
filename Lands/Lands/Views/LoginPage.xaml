@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage 
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -48,6 +48,8 @@
                         Placeholder="Enter your password...">
                     </Entry>
                 </Grid>
+                <ActivityIndicator>
+                </ActivityIndicator>
                 <StackLayout
                     Orientation="Horizontal">
                     <Label
@@ -59,8 +61,11 @@
                         HorizontalOptions="End">
                     </Switch>
                 </StackLayout>
-                <ActivityIndicator>
-                </ActivityIndicator>
+                <Label
+                    HorizontalOptions="Center"
+                    Text="Forgot your password?"
+                    TextColor="Blue">
+                </Label>
                 <StackLayout
                     Margin="40,0">
                     <Button
