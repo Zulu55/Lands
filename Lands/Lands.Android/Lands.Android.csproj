@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Lands.Droid</RootNamespace>
     <AssemblyName>Lands.Android</AssemblyName>
-    <TargetFrameworkVersion>v7.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
@@ -75,6 +75,10 @@
     <AndroidResource Include="Resources\drawable-hdpi\ic_chevron_right.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\ic_chevron_right.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\ic_chevron_right.png" />
+    <AndroidResource Include="Resources\drawable\ic_action_language.png" />
+    <AndroidResource Include="Resources\drawable\ic_action_monetization_on.png" />
+    <AndroidResource Include="Resources\drawable\ic_action_translate.png" />
+    <AndroidResource Include="Resources\drawable\ic_action_people.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />
