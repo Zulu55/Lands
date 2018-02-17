@@ -111,6 +111,7 @@
     <BundleResource Include="Resources\Icon-Small%402x.png" />
     <BundleResource Include="Resources\Icon-Small%403x.png" />
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
+    <BundleResource Include="Resources\ic_chevron_right.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -127,7 +128,7 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\Lands\Lands.csproj">
-      <Project>{47E8B8D3-8D8C-49CA-B0C0-8307DF5DFE63}</Project>
+      <Project>{D575375E-DDB8-4935-97B8-85F5117410CB}</Project>
       <Name>Lands</Name>
     </ProjectReference>
   </ItemGroup>
