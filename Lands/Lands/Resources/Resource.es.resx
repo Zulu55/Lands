@@ -138,4 +138,22 @@
   <data name="SomethingWrong" xml:space="preserve">
     <value>Algo anda mal con los servicios, por favor intenta más tarde.</value>
   </data>
+  <data name="Login" xml:space="preserve">
+    <value>Ingresar</value>
+  </data>
+  <data name="EMail" xml:space="preserve">
+    <value>E-Mail</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Contraseña</value>
+  </data>
+  <data name="PasswordPlaceHolder" xml:space="preserve">
+    <value>Ingresa tu contraseña...</value>
+  </data>
+  <data name="Forgot" xml:space="preserve">
+    <value>¿Olvidaste tu contraseña?</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Registrarse</value>
+  </data>
 </root>

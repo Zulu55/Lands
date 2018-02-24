@@ -5,7 +5,7 @@
     xmlns:i18n="clr-namespace:Lands.Helpers"
     x:Class="Lands.Views.LoginPage"
     BindingContext="{Binding Main, Source={StaticResource Locator}}"
-    Title="Login">
+    Title="{i18n:Translate Login}">
     <ContentPage.Content>
         <ScrollView
             BindingContext="{Binding Login}">
@@ -25,7 +25,7 @@
                     <Label
                         Grid.Row="0"
                         Grid.Column="0"
-                        Text="E-Mail"
+                        Text="{i18n:Translate EMail}"
                         VerticalOptions="Center">
                     </Label>
                     <Entry
@@ -38,7 +38,7 @@
                     <Label
                         Grid.Row="1"
                         Grid.Column="0"
-                        Text="Password"
+                        Text="{i18n:Translate Password}"
                         VerticalOptions="Center">
                     </Label>
                     <Entry
@@ -46,7 +46,7 @@
                         Grid.Column="1"
                         IsPassword="true"
                         Text="{Binding Password, Mode=TwoWay}"
-                        Placeholder="Enter your password...">
+                        Placeholder="{i18n:Translate PasswordPlaceHolder}">
                     </Entry>
                 </Grid>
                 <ActivityIndicator
@@ -69,7 +69,7 @@
                 </StackLayout>
                 <Label
                     HorizontalOptions="Center"
-                    Text="Forgot your password?"
+                    Text="{i18n:Translate Forgot}"
                     TextColor="Blue"
                     VerticalOptions="CenterAndExpand">
                 </Label>
@@ -84,7 +84,7 @@
                         HeightRequest="46"
                         HorizontalOptions="FillAndExpand"
                         IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
-                        Text="Login"
+                        Text="{i18n:Translate Login}"
                         TextColor="White">
                     </Button>
                     <Button
@@ -93,7 +93,7 @@
                         HeightRequest="46"
                         HorizontalOptions="FillAndExpand"
                         IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
-                        Text="Register"
+                        Text="{i18n:Translate Register}"
                         TextColor="White">
                     </Button>
                 </StackLayout>
