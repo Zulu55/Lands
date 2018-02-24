@@ -66,4 +66,9 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Lands.Domain\Lands.Domain.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Configuration">
+      <HintPath>..\..\..\..\..\..\..\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Configuration.dll</HintPath>
+    </Reference>
+  </ItemGroup>
 </Project>
