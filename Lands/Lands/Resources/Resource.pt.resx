@@ -129,7 +129,13 @@
   <data name="Error" xml:space="preserve">
     <value>Erro</value>
   </data>
+  <data name="PasswordValidation" xml:space="preserve">
+    <value>Você deve inserir uma senha.</value>
+  </data>
   <data name="Rememberme" xml:space="preserve">
     <value>Lembre-se de mim neste dispositivo</value>
+  </data>
+  <data name="SomethingWrong" xml:space="preserve">
+    <value>Algo está errado com os serviços, tente mais tarde.</value>
   </data>
 </root>

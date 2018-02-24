@@ -37,5 +37,15 @@
         {
             get { return Resource.Rememberme; }
         }
+
+        public static string PasswordValidation
+        {
+            get { return Resource.PasswordValidation; }
+        }
+
+        public static string SomethingWrong
+        {
+            get { return Resource.SomethingWrong; }
+        }
     }
 }
