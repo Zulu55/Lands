@@ -32,15 +32,18 @@
                                 <Label 
                                     Grid.Column="0"
                                     Text="{Binding Code}"
-                                    TextColor="Black">
+                                    TextColor="Black"
+                                    VerticalOptions="Center">
                                 </Label>
                                 <Label 
                                     Grid.Column="1"
                                     Text="{Binding Name}"
-                                    TextColor="Black">
+                                    TextColor="Black"
+                                    VerticalOptions="Center">
                                 </Label>
                                 <Label 
                                     Grid.Column="2"
+                                    FontSize="40"
                                     Text="{Binding Symbol}"
                                     TextColor="Black">
                                 </Label>
