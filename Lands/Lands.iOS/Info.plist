@@ -50,5 +50,12 @@
 	<string>LaunchScreen</string>
 	<key>CFBundleName</key>
 	<string>Lands</string>
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>es</string>
+		<string>pt</string>
+	</array>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
 </dict>
 </plist>
