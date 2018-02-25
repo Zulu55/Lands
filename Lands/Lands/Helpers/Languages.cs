@@ -157,5 +157,20 @@
         {
             get { return Resource.CIOC; }
         }
+
+        public static string Borders
+        {
+            get { return Resource.Borders; }
+        }
+
+        public static string Currencies
+        {
+            get { return Resource.Currencies; }
+        }
+
+        public static string MyLanguages
+        {
+            get { return Resource.MyLanguages; }
+        }
     }
 }

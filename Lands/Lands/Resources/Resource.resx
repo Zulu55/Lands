@@ -204,4 +204,46 @@
   <data name="CIOC" xml:space="preserve">
     <value>CIOC:</value>
   </data>
+  <data name="Borders" xml:space="preserve">
+    <value>Borders</value>
+  </data>
+  <data name="Currencies" xml:space="preserve">
+    <value>Currencies</value>
+  </data>
+  <data name="German" xml:space="preserve">
+    <value>German:</value>
+  </data>
+  <data name="Spanish" xml:space="preserve">
+    <value>Spanish:</value>
+  </data>
+  <data name="French" xml:space="preserve">
+    <value>French:</value>
+  </data>
+  <data name="Japanese" xml:space="preserve">
+    <value>Japanese:</value>
+  </data>
+  <data name="Italian" xml:space="preserve">
+    <value>Italian:</value>
+  </data>
+  <data name="Brazilian" xml:space="preserve">
+    <value>Brazilian:</value>
+  </data>
+  <data name="Portuguese" xml:space="preserve">
+    <value>Portuguese:</value>
+  </data>
+  <data name="Dutch" xml:space="preserve">
+    <value>Dutch:</value>
+  </data>
+  <data name="Croatian" xml:space="preserve">
+    <value>Croatian:</value>
+  </data>
+  <data name="Persian" xml:space="preserve">
+    <value>Persian:</value>
+  </data>
+  <data name="Translations" xml:space="preserve">
+    <value>Translations</value>
+  </data>
+  <data name="MyLanguages" xml:space="preserve">
+    <value>Languages</value>
+  </data>
 </root>

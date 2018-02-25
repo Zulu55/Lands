@@ -220,5 +220,89 @@ namespace Lands.Resources {
                 return ResourceManager.GetString("CIOC", resourceCulture);
             }
         }
+        
+        public static string Borders {
+            get {
+                return ResourceManager.GetString("Borders", resourceCulture);
+            }
+        }
+        
+        public static string Currencies {
+            get {
+                return ResourceManager.GetString("Currencies", resourceCulture);
+            }
+        }
+        
+        public static string German {
+            get {
+                return ResourceManager.GetString("German", resourceCulture);
+            }
+        }
+        
+        public static string Spanish {
+            get {
+                return ResourceManager.GetString("Spanish", resourceCulture);
+            }
+        }
+        
+        public static string French {
+            get {
+                return ResourceManager.GetString("French", resourceCulture);
+            }
+        }
+        
+        public static string Japanese {
+            get {
+                return ResourceManager.GetString("Japanese", resourceCulture);
+            }
+        }
+        
+        public static string Italian {
+            get {
+                return ResourceManager.GetString("Italian", resourceCulture);
+            }
+        }
+        
+        public static string Brazilian {
+            get {
+                return ResourceManager.GetString("Brazilian", resourceCulture);
+            }
+        }
+        
+        public static string Portuguese {
+            get {
+                return ResourceManager.GetString("Portuguese", resourceCulture);
+            }
+        }
+        
+        public static string Dutch {
+            get {
+                return ResourceManager.GetString("Dutch", resourceCulture);
+            }
+        }
+        
+        public static string Croatian {
+            get {
+                return ResourceManager.GetString("Croatian", resourceCulture);
+            }
+        }
+        
+        public static string Persian {
+            get {
+                return ResourceManager.GetString("Persian", resourceCulture);
+            }
+        }
+        
+        public static string Translations {
+            get {
+                return ResourceManager.GetString("Translations", resourceCulture);
+            }
+        }
+        
+        public static string MyLanguages {
+            get {
+                return ResourceManager.GetString("MyLanguages", resourceCulture);
+            }
+        }
     }
 }

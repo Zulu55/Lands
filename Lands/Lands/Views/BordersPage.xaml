@@ -2,10 +2,11 @@
 <ContentPage 
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:i18n="clr-namespace:Lands.Helpers"
     x:Class="Lands.Views.BordersPage"
     BindingContext="{Binding Main, Source={StaticResource Locator}}"
     Icon="ic_action_language"
-    Title="Borders">
+    Title="{i18n:Translate Borders}">
     <ContentPage.Content>
         <StackLayout
             BindingContext="{Binding Land}"
