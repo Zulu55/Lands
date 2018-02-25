@@ -124,5 +124,101 @@ namespace Lands.Resources {
                 return ResourceManager.GetString("Register", resourceCulture);
             }
         }
+        
+        public static string Search {
+            get {
+                return ResourceManager.GetString("Search", resourceCulture);
+            }
+        }
+        
+        public static string Countries {
+            get {
+                return ResourceManager.GetString("Countries", resourceCulture);
+            }
+        }
+        
+        public static string Country {
+            get {
+                return ResourceManager.GetString("Country", resourceCulture);
+            }
+        }
+        
+        public static string Information {
+            get {
+                return ResourceManager.GetString("Information", resourceCulture);
+            }
+        }
+        
+        public static string Capital {
+            get {
+                return ResourceManager.GetString("Capital", resourceCulture);
+            }
+        }
+        
+        public static string Population {
+            get {
+                return ResourceManager.GetString("Population", resourceCulture);
+            }
+        }
+        
+        public static string Area {
+            get {
+                return ResourceManager.GetString("Area", resourceCulture);
+            }
+        }
+        
+        public static string AlphaCode2 {
+            get {
+                return ResourceManager.GetString("AlphaCode2", resourceCulture);
+            }
+        }
+        
+        public static string AlphaCode3 {
+            get {
+                return ResourceManager.GetString("AlphaCode3", resourceCulture);
+            }
+        }
+        
+        public static string Region {
+            get {
+                return ResourceManager.GetString("Region", resourceCulture);
+            }
+        }
+        
+        public static string Subregion {
+            get {
+                return ResourceManager.GetString("Subregion", resourceCulture);
+            }
+        }
+        
+        public static string Demonym {
+            get {
+                return ResourceManager.GetString("Demonym", resourceCulture);
+            }
+        }
+        
+        public static string GINI {
+            get {
+                return ResourceManager.GetString("GINI", resourceCulture);
+            }
+        }
+        
+        public static string NativeName {
+            get {
+                return ResourceManager.GetString("NativeName", resourceCulture);
+            }
+        }
+        
+        public static string NumericCode {
+            get {
+                return ResourceManager.GetString("NumericCode", resourceCulture);
+            }
+        }
+        
+        public static string CIOC {
+            get {
+                return ResourceManager.GetString("CIOC", resourceCulture);
+            }
+        }
     }
 }

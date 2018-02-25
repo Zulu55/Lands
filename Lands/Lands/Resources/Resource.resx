@@ -156,4 +156,52 @@
   <data name="Register" xml:space="preserve">
     <value>Register</value>
   </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search...</value>
+  </data>
+  <data name="Countries" xml:space="preserve">
+    <value>Countries</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="Information" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="Capital" xml:space="preserve">
+    <value>Capital:</value>
+  </data>
+  <data name="Population" xml:space="preserve">
+    <value>Population:</value>
+  </data>
+  <data name="Area" xml:space="preserve">
+    <value>Area:</value>
+  </data>
+  <data name="AlphaCode2" xml:space="preserve">
+    <value>Alpha Code 2:</value>
+  </data>
+  <data name="AlphaCode3" xml:space="preserve">
+    <value>Alpha Code 3:</value>
+  </data>
+  <data name="Region" xml:space="preserve">
+    <value>Region:</value>
+  </data>
+  <data name="Subregion" xml:space="preserve">
+    <value>Subregion:</value>
+  </data>
+  <data name="Demonym" xml:space="preserve">
+    <value>Demonym:</value>
+  </data>
+  <data name="GINI" xml:space="preserve">
+    <value>GINI:</value>
+  </data>
+  <data name="NativeName" xml:space="preserve">
+    <value>Native Name:</value>
+  </data>
+  <data name="NumericCode" xml:space="preserve">
+    <value>Numeric Code:</value>
+  </data>
+  <data name="CIOC" xml:space="preserve">
+    <value>CIOC:</value>
+  </data>
 </root>
