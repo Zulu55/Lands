@@ -10,7 +10,7 @@
         <ScrollView
             BindingContext="{Binding Login}">
             <StackLayout
-                Padding="5">
+                Padding="5,20,5,5">
                 <Image
                     Source="onu"
                     WidthRequest="200">

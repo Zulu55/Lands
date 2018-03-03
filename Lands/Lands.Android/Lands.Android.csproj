@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Lands.Droid</RootNamespace>
     <AssemblyName>Lands.Android</AssemblyName>
-    <TargetFrameworkVersion>v7.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
@@ -71,6 +71,9 @@
     <PackageReference Include="Xamarin.Android.Support.v4" Version="25.4.0.2" />
     <PackageReference Include="Xamarin.Android.Support.v7.CardView" Version="25.4.0.2" />
     <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="25.4.0.2" />
+    <PackageReference Include="Xam.Plugins.Settings">
+      <Version>3.1.1</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Implementations\Localize.cs" />
@@ -95,6 +98,9 @@
     <AndroidResource Include="Resources\drawable\ic_action_monetization_on.png" />
     <AndroidResource Include="Resources\drawable\ic_action_translate.png" />
     <AndroidResource Include="Resources\drawable\ic_action_people.png" />
+    <AndroidResource Include="Resources\drawable\ic_settings.png" />
+    <AndroidResource Include="Resources\drawable\ic_insert_chart.png" />
+    <AndroidResource Include="Resources\drawable\ic_exit_to_app.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />

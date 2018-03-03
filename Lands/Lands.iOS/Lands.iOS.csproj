@@ -118,6 +118,9 @@
     <BundleResource Include="Resources\ic_action_monetization_on.png" />
     <BundleResource Include="Resources\ic_action_people.png" />
     <BundleResource Include="Resources\ic_action_translate.png" />
+    <BundleResource Include="Resources\ic_exit_to_app.png" />
+    <BundleResource Include="Resources\ic_insert_chart.png" />
+    <BundleResource Include="Resources\ic_settings.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -145,6 +148,9 @@
       <Version>2.3.4</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="2.5.0.122203" />
+    <PackageReference Include="Xam.Plugins.Settings">
+      <Version>3.1.1</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
