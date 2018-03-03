@@ -246,4 +246,7 @@
   <data name="MyLanguages" xml:space="preserve">
     <value>Languages</value>
   </data>
+  <data name="Menu" xml:space="preserve">
+    <value>Menu</value>
+  </data>
 </root>
