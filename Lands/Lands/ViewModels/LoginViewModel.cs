@@ -139,7 +139,10 @@
             }
 
             var mainViewModel = MainViewModel.GetInstance();
-            mainViewModel.Token = token;
+            mainViewModel.Token = token.AccessToken;
+            mainViewModel.TokenType = token.TokenType;
+            Settings.Token = token.AccessToken;
+            Settings.TokenType = token.TokenType;
             mainViewModel.Lands = new LandsViewModel();
             Application.Current.MainPage = new MasterPage();
 
