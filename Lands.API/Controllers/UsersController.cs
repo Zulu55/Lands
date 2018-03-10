@@ -72,11 +72,11 @@
 
         // POST: api/Users
         [ResponseType(typeof(User))]
-        public async Task<IHttpActionResult> PostUser(UserView view)
+        public async Task<IHttpActionResult> PostUser(User model)
         {
-            if (view.ImageArray != null && view.ImageArray.Length > 0)
+            if (model.ImageArray != null && model.ImageArray.Length > 0)
             {
-                var stream = new MemoryStream(view.ImageArray);
+                var stream = new MemoryStream(model.ImageArray);
                 var guid = Guid.NewGuid().ToString();
                 var file = string.Format("{0}.jpg", guid);
                 var folder = "~/Content/Images";
@@ -85,31 +85,15 @@
 
                 if (response)
                 {
-                    view.ImagePath = fullPath;
+                    model.ImagePath = fullPath;
                 }
             }
 
-            var user = this.ToUser(view);
-            db.Users.Add(user);
+            db.Users.Add(model);
             await db.SaveChangesAsync();
-            UsersHelper.CreateUserASP(view.Email, "User", view.Password);
+            UsersHelper.CreateUserASP(model.Email, "User", model.Password);
 
-            return CreatedAtRoute("DefaultApi", new { id = view.UserId }, view);
-        }
-
-        private User ToUser(UserView view)
-        {
-            return new User
-            {
-                Email = view.Email,
-                FirstName = view.FirstName,
-                ImagePath = view.ImagePath,
-                LastName = view.LastName,
-                Telephone = view.Telephone,
-                UserId = view.UserId,
-                UserType = view.UserType,
-                UserTypeId = view.UserTypeId,
-            };
+            return CreatedAtRoute("DefaultApi", new { id = model.UserId }, model);
         }
 
         // DELETE: api/Users/5
