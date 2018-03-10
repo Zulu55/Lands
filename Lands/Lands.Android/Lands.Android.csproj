@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Lands.Droid</RootNamespace>
     <AssemblyName>Lands.Android</AssemblyName>
-    <TargetFrameworkVersion>v7.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
@@ -101,6 +101,7 @@
     <AndroidResource Include="Resources\drawable\ic_settings.png" />
     <AndroidResource Include="Resources\drawable\ic_insert_chart.png" />
     <AndroidResource Include="Resources\drawable\ic_exit_to_app.png" />
+    <AndroidResource Include="Resources\drawable\ic_action_menu.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />
