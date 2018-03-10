@@ -258,4 +258,70 @@
   <data name="LogOut" xml:space="preserve">
     <value>Logout</value>
   </data>
+  <data name="RegisterTitle" xml:space="preserve">
+    <value>Register New User</value>
+  </data>
+  <data name="ChangeImage" xml:space="preserve">
+    <value>Touch the image to chage it</value>
+  </data>
+  <data name="FirstNameLabel" xml:space="preserve">
+    <value>First Name</value>
+  </data>
+  <data name="FirstNamePlaceHolder" xml:space="preserve">
+    <value>Enter the first name...</value>
+  </data>
+  <data name="FirstNameValidation" xml:space="preserve">
+    <value>You must enter a first name.</value>
+  </data>
+  <data name="LastNameLabel" xml:space="preserve">
+    <value>Last Name</value>
+  </data>
+  <data name="LastNamePlaceHolder" xml:space="preserve">
+    <value>Enter the last name...</value>
+  </data>
+  <data name="LastNameValidation" xml:space="preserve">
+    <value>You must enter a last name.</value>
+  </data>
+  <data name="PhoneLabel" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="PhonePlaceHolder" xml:space="preserve">
+    <value>Enter the phone...</value>
+  </data>
+  <data name="PhoneValidation" xml:space="preserve">
+    <value>You must enter a phone.</value>
+  </data>
+  <data name="ConfirmLabel" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="ConfirmPlaceHolder" xml:space="preserve">
+    <value>Enter the password confirm...</value>
+  </data>
+  <data name="ConfirmValidation" xml:space="preserve">
+    <value>You must enter a confirm.</value>
+  </data>
+  <data name="EmailValidation2" xml:space="preserve">
+    <value>You must enter a valid email.</value>
+  </data>
+  <data name="PasswordValidation2" xml:space="preserve">
+    <value>The password must have at least seix (6) characters.</value>
+  </data>
+  <data name="ConfirmValidation2" xml:space="preserve">
+    <value>The password and confirm does not match.</value>
+  </data>
+  <data name="UserRegisteredMessage" xml:space="preserve">
+    <value>The user was create, now you can login with this email and password.</value>
+  </data>
+  <data name="SourceImageQuestion" xml:space="preserve">
+    <value>Where do you want to take the image?</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="FromGallery" xml:space="preserve">
+    <value>From gallery</value>
+  </data>
+  <data name="FromCamera" xml:space="preserve">
+    <value>From camera</value>
+  </data>
 </root>

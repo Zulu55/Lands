@@ -122,6 +122,7 @@
     <BundleResource Include="Resources\ic_insert_chart.png" />
     <BundleResource Include="Resources\ic_settings.png" />
     <BundleResource Include="Resources\ic_action_menu.png" />
+    <BundleResource Include="Resources\no_image.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

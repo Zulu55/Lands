@@ -90,6 +90,7 @@
                     <Button
                         BackgroundColor="Purple"
                         BorderRadius="23"
+                        Command="{Binding RegisterCommand}"
                         HeightRequest="46"
                         HorizontalOptions="FillAndExpand"
                         IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
