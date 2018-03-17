@@ -26,7 +26,7 @@
             set;
         }
 
-        public User User
+        public UserLocal User
         {
             get;
             set;

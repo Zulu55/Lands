@@ -4,6 +4,8 @@
     using Views;
     using ViewModels;
     using Helpers;
+    using Models;
+    using Services;
 
     public partial class App : Application
 	{
@@ -26,9 +28,12 @@
             }
             else
             {
+                var dataService = new DataService();
+                var user = dataService.First<UserLocal>(false);
                 var mainViewModel = MainViewModel.GetInstance();
                 mainViewModel.Token = Settings.Token;
                 mainViewModel.TokenType = Settings.TokenType;
+                mainViewModel.User = user;
                 mainViewModel.Lands = new LandsViewModel();
                 Application.Current.MainPage = new MasterPage();
             }
