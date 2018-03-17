@@ -2,6 +2,7 @@
 <ContentPage 
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions" 
     xmlns:i18n="clr-namespace:Lands.Helpers"
     x:Class="Lands.Views.MenuPage"
     BindingContext="{Binding Main, Source={StaticResource Locator}}"
@@ -11,13 +12,15 @@
     <ContentPage.Content>
         <StackLayout
             Padding="5,20,5,5">
-            <Image
-                Source="onu"
-                WidthRequest="100">
-            </Image>
+            <controls:CircleImage 
+                Aspect="AspectFill"
+                HeightRequest="150"
+                Source="{Binding User.ImageFullPath}">
+            </controls:CircleImage>
             <Label
                 FontSize="Large"
                 FontAttributes="Bold"
+                HorizontalOptions="Center"
                 Text="{Binding User.FullName}"
                 TextColor="White">
             </Label>
