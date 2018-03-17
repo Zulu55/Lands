@@ -7,8 +7,12 @@
     using Helpers;
     using Domain;
 
-    public class MainViewModel
+    public class MainViewModel : BaseViewModel
     {
+        #region Attibrutes
+        private UserLocal user;
+        #endregion
+
         #region Properties
         public List<Land> LandsList
         {
@@ -28,8 +32,8 @@
 
         public UserLocal User
         {
-            get;
-            set;
+            get { return this.user; }
+            set { SetValue(ref this.user, value); }
         }
         #endregion
 

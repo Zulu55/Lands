@@ -348,6 +348,8 @@
             string urlBase,
             string servicePrefix,
             string controller,
+            string tokenType,
+            string accessToken,
             string email)
         {
             try
@@ -363,6 +365,8 @@
                     Encoding.UTF8,
                     "application/json");
                 var client = new HttpClient();
+                client.DefaultRequestHeaders.Authorization =
+                    new AuthenticationHeaderValue(tokenType, accessToken);
                 client.BaseAddress = new Uri(urlBase);
                 var url = string.Format("{0}{1}", servicePrefix, controller);
                 var response = await client.PostAsync(url, content);
