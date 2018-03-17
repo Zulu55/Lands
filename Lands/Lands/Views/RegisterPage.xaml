@@ -42,7 +42,6 @@
                         VerticalOptions="Center">
                     </Label>
                     <Entry 
-                        BackgroundColor="White" 
                         Grid.Column="1" 
                         Grid.Row="0" 
                         Placeholder="{i18n:Translate FirstNamePlaceHolder}" 
@@ -103,7 +102,6 @@
                     <Entry 
                         Grid.Column="1" 
                         Grid.Row="4" 
-                        BackgroundColor="White" 
                         IsPassword="true" 
                         Placeholder="{i18n:Translate PasswordPlaceHolder}" 
                         TextColor="Black" 
@@ -119,7 +117,6 @@
                     <Entry 
                         Grid.Column="1" 
                         Grid.Row="5" 
-                        BackgroundColor="White" 
                         IsPassword="true" 
                         Placeholder="{i18n:Translate ConfirmPlaceHolder}" 
                         TextColor="Black" 
