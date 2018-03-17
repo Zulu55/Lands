@@ -324,4 +324,34 @@
   <data name="FromCamera" xml:space="preserve">
     <value>Da câmera</value>
   </data>
+  <data name="Save" xml:space="preserve">
+    <value>Salvar</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Alterar Senha</value>
+  </data>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>Senha atual</value>
+  </data>
+  <data name="CurrentPasswordPlaceHolder" xml:space="preserve">
+    <value>Digite sua senha atual...</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>Nova senha</value>
+  </data>
+  <data name="NewPasswordPlaceHolder" xml:space="preserve">
+    <value>Digite a nova senha...</value>
+  </data>
+  <data name="ConnectionError1" xml:space="preserve">
+    <value>Verifique se você ativou os parâmetros da internet.</value>
+  </data>
+  <data name="ConnectionError2" xml:space="preserve">
+    <value>Verifique se você possui uma conexão com a internet.</value>
+  </data>
+  <data name="LoginError" xml:space="preserve">
+    <value>E-mail ou senha incorretos.</value>
+  </data>
+  <data name="ChagePasswordConfirm" xml:space="preserve">
+    <value>A senha foi alterada com sucesso.</value>
+  </data>
 </root>

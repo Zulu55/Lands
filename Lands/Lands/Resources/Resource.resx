@@ -324,4 +324,34 @@
   <data name="FromCamera" xml:space="preserve">
     <value>From camera</value>
   </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Change Password</value>
+  </data>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>Current Password</value>
+  </data>
+  <data name="CurrentPasswordPlaceHolder" xml:space="preserve">
+    <value>Enter your current password...</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>New Password</value>
+  </data>
+  <data name="NewPasswordPlaceHolder" xml:space="preserve">
+    <value>Enter the new password...</value>
+  </data>
+  <data name="ConnectionError1" xml:space="preserve">
+    <value>Please turn on your internet settings.</value>
+  </data>
+  <data name="ConnectionError2" xml:space="preserve">
+    <value>Check you internet connection.</value>
+  </data>
+  <data name="LoginError" xml:space="preserve">
+    <value>Email or password incorrect.</value>
+  </data>
+  <data name="ChagePasswordConfirm" xml:space="preserve">
+    <value>The password was changed successfully.</value>
+  </data>
 </root>

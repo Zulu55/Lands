@@ -324,4 +324,64 @@
   <data name="FromCamera" xml:space="preserve">
     <value>Desde la cámara</value>
   </data>
+  <data name="Save" xml:space="preserve">
+    <value>Guardar</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Cambiar Contraseña</value>
+  </data>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>Contraseña actual</value>
+  </data>
+  <data name="CurrentPasswordPlaceHolder" xml:space="preserve">
+    <value>Ingrese su contraseña actual...</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>Contraseña nueva</value>
+  </data>
+  <data name="NewPasswordPlaceHolder" xml:space="preserve">
+    <value>Ingrese la nueva contraseña...</value>
+  </data>
+  <data name="ConnectionError1" xml:space="preserve">
+    <value>Verifica que tengas los parámetros de internet activados.</value>
+  </data>
+  <data name="ConnectionError2" xml:space="preserve">
+    <value>Verifica que tengas conexión a internet.</value>
+  </data>
+  <data name="LoginError" xml:space="preserve">
+    <value>Email o contraseña incorrectos.</value>
+  </data>
+  <data name="ChagePasswordConfirm" xml:space="preserve">
+    <value>La contraseña fue cambiada exitosamente.</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Guardar</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Cambiar Contraseña</value>
+  </data>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>Contraseña actual</value>
+  </data>
+  <data name="CurrentPasswordPlaceHolder" xml:space="preserve">
+    <value>Ingrese su contraseña actual...</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>Contraseña nueva</value>
+  </data>
+  <data name="NewPasswordPlaceHolder" xml:space="preserve">
+    <value>Ingrese la nueva contraseña...</value>
+  </data>
+  <data name="ConnectionError1" xml:space="preserve">
+    <value>Verifica que tengas los parámetros de internet activados.</value>
+  </data>
+  <data name="ConnectionError2" xml:space="preserve">
+    <value>Verifica que tengas conexión a internet.</value>
+  </data>
+  <data name="LoginError" xml:space="preserve">
+    <value>Email o contraseña incorrectos.</value>
+  </data>
+  <data name="ChagePasswordConfirm" xml:space="preserve">
+    <value>La contraseña fue cambiada exitosamente.</value>
+  </data>
 </root>

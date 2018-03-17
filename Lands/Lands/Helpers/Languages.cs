@@ -301,5 +301,55 @@
         {
             get { return Resource.FromCamera; }
         }
+
+        public static string Save
+        {
+            get { return Resource.Save; }
+        }
+
+        public static string ChangePassword
+        {
+            get { return Resource.ChangePassword; }
+        }
+
+        public static string CurrentPassword
+        {
+            get { return Resource.CurrentPassword; }
+        }
+
+        public static string CurrentPasswordPlaceHolder
+        {
+            get { return Resource.CurrentPasswordPlaceHolder; }
+        }
+
+        public static string NewPassword
+        {
+            get { return Resource.NewPassword; }
+        }
+
+        public static string NewPasswordPlaceHolder
+        {
+            get { return Resource.NewPasswordPlaceHolder; }
+        }
+
+        public static string ConnectionError1
+        {
+            get { return Resource.ConnectionError1; }
+        }
+
+        public static string ConnectionError2
+        {
+            get { return Resource.ConnectionError2; }
+        }
+
+        public static string LoginError
+        {
+            get { return Resource.LoginError; }
+        }
+
+        public static string ChagePasswordConfirm
+        {
+            get { return Resource.ChagePasswordConfirm; }
+        }
     }
 }

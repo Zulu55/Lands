@@ -57,6 +57,12 @@
             get;
             set;
         }
+
+        public MyProfileViewModel MyProfile
+        {
+            get;
+            set;
+        }
         #endregion
 
         #region Constructors
