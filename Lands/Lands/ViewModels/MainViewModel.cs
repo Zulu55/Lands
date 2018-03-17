@@ -67,6 +67,12 @@
             get;
             set;
         }
+
+        public ChangePasswordViewModel ChangePassword
+        {
+            get;
+            set;
+        }
         #endregion
 
         #region Constructors

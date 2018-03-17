@@ -1,5 +1,6 @@
 ﻿namespace Lands.ViewModels
 {
+    using System;
     using System.Windows.Input;
     using GalaSoft.MvvmLight.Command;
     using Helpers;
@@ -7,6 +8,7 @@
     using Plugin.Media;
     using Plugin.Media.Abstractions;
     using Services;
+    using Views;
     using Xamarin.Forms;
 
     public class MyProfileViewModel : BaseViewModel
@@ -62,6 +64,20 @@
         #endregion
 
         #region Commands
+        public ICommand ChangePasswordCommand
+        {
+            get
+            {
+                return new RelayCommand(ChangePassword);
+            }
+        }
+
+        private async void ChangePassword()
+        {
+            MainViewModel.GetInstance().ChangePassword = new ChangePasswordViewModel();
+            await App.Navigator.PushAsync(new ChangePasswordPage());
+        }
+
         public ICommand ChangeImageCommand
         {
             get
