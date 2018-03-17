@@ -6,6 +6,7 @@
     using Helpers;
     using Models;
     using Services;
+    using System;
 
     public partial class App : Application
 	{
@@ -47,6 +48,20 @@
         #endregion
 
         #region Methods
+        public static Action HideLoginView
+        {
+            get
+            {
+                return new Action(() => App.Current.MainPage = new NavigationPage(new LoginPage()));
+            }
+        }
+
+        public static void NavigateToProfile(FacebookResponse profile)
+        {
+            var x = 1;
+            x++;
+        }
+
         protected override void OnStart()
         {
             // Handle when your app starts
