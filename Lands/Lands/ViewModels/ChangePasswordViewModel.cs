@@ -90,7 +90,7 @@
             {
                 await Application.Current.MainPage.DisplayAlert(
                     Languages.Error,
-                    Languages.PasswordValidation,
+                    Languages.PasswordError,
                     Languages.Accept);
                 return;
             }
