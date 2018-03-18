@@ -147,6 +147,7 @@
                 this.Email);
 
             var userLocal = Converter.ToUserLocal(user);
+            userLocal.Password = this.Password;
 
             var mainViewModel = MainViewModel.GetInstance();
             mainViewModel.Token = token;

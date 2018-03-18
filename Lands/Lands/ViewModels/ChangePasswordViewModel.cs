@@ -86,6 +86,16 @@
                 return;
             }
 
+            if (this.CurrentPassword != MainViewModel.GetInstance().User.Password)
+            {
+                await Application.Current.MainPage.DisplayAlert(
+                    Languages.Error,
+                    Languages.PasswordValidation,
+                    Languages.Accept);
+                return;
+            }
+
+
             if (string.IsNullOrEmpty(this.NewPassword))
             {
                 await Application.Current.MainPage.DisplayAlert(
