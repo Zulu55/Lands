@@ -6,10 +6,11 @@
     using System.Net.Http.Headers;
     using System.Text;
     using System.Threading.Tasks;
+    using Domain;
+    using Helpers;
     using Models;
     using Newtonsoft.Json;
     using Plugin.Connectivity;
-    using Domain;
 
     public class ApiService
     {
@@ -20,7 +21,7 @@
                 return new Response
                 {
                     IsSuccess = false,
-                    Message = "Please turn on your internet settings.",
+                    Message = Languages.ConnectionError1,
                 };
             }
 
@@ -31,14 +32,13 @@
                 return new Response
                 {
                     IsSuccess = false,
-                    Message = "Check you internet connection.",
+                    Message = Languages.ConnectionError2,
                 };
             }
 
             return new Response
             {
                 IsSuccess = true,
-                Message = "Ok",
             };
         }
 

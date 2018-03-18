@@ -219,8 +219,8 @@
                 apiSecurity,
                 "/api",
                 "/Users",
-                MainViewModel.GetInstance().TokenType,
-                MainViewModel.GetInstance().Token,
+                MainViewModel.GetInstance().Token.TokenType,
+                MainViewModel.GetInstance().Token.AccessToken,
                 userDomain);
 
             if (!response.IsSuccess)
@@ -238,8 +238,8 @@
                 apiSecurity,
                 "/api",
                 "/Users/GetUserByEmail",
-                MainViewModel.GetInstance().TokenType,
-                MainViewModel.GetInstance().Token,
+                MainViewModel.GetInstance().Token.TokenType,
+                MainViewModel.GetInstance().Token.AccessToken,
                 this.User.Email);
             var userLocal = Converter.ToUserLocal(userApi);
 

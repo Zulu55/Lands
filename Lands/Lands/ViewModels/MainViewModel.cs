@@ -1,11 +1,9 @@
 ﻿namespace Lands.ViewModels
 {
-    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using Models;
     using Helpers;
-    using Domain;
+    using Models;
 
     public class MainViewModel : BaseViewModel
     {
@@ -20,9 +18,11 @@
             set;
         }
 
-        public string Token { get; set; }
-
-        public string TokenType { get; set; }
+        public TokenResponse Token 
+        { 
+            get; 
+            set; 
+        }
 
         public ObservableCollection<MenuItemViewModel> Menus
         {

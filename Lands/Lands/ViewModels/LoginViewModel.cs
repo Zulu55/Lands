@@ -21,37 +21,37 @@
         private bool isEnabled;
         #endregion
 
-            #region Properties
-            public string Email
-            {
-                get { return this.email; }
-                set { SetValue(ref this.email, value); }
-            }
+        #region Properties
+        public string Email
+        {
+            get { return this.email; }
+            set { SetValue(ref this.email, value); }
+        }
 
-            public string Password
-            {
-                get { return this.password; }
-                set { SetValue(ref this.password, value); }
-            }
+        public string Password
+        {
+            get { return this.password; }
+            set { SetValue(ref this.password, value); }
+        }
 
-            public bool IsRunning
-            {
-                get { return this.isRunning; }
-                set { SetValue(ref this.isRunning, value); }
-            }
+        public bool IsRunning
+        {
+            get { return this.isRunning; }
+            set { SetValue(ref this.isRunning, value); }
+        }
 
-            public bool IsRemembered
-            {
-                get;
-                set;
-            }
+        public bool IsRemembered
+        {
+            get;
+            set;
+        }
 
-            public bool IsEnabled
-            {
-                get { return this.isEnabled; }
-                set { SetValue(ref this.isEnabled, value); }
-            }
-            #endregion
+        public bool IsEnabled
+        {
+            get { return this.isEnabled; }
+            set { SetValue(ref this.isEnabled, value); }
+        }
+        #endregion
 
         #region Constructors
         public LoginViewModel()
@@ -132,7 +132,7 @@
                 this.IsEnabled = true;
                 await Application.Current.MainPage.DisplayAlert(
                     Languages.Error,
-                    token.ErrorDescription,
+                    Languages.LoginError,
                     Languages.Accept);
                 this.Password = string.Empty;
                 return;
@@ -149,16 +149,20 @@
             var userLocal = Converter.ToUserLocal(user);
 
             var mainViewModel = MainViewModel.GetInstance();
-            mainViewModel.Token = token.AccessToken;
-            mainViewModel.TokenType = token.TokenType;
+            mainViewModel.Token = token;
             mainViewModel.User = userLocal;
 
             if (this.IsRemembered)
             {
-                Settings.Token = token.AccessToken;
-                Settings.TokenType = token.TokenType;
-                this.dataService.DeleteAllAndInsert(userLocal);
+                Settings.IsRemembered = "true";
             }
+            else
+            {
+                Settings.IsRemembered = "false";
+            }
+
+            this.dataService.DeleteAllAndInsert(userLocal);
+            this.dataService.DeleteAllAndInsert(token);
 
             mainViewModel.Lands = new LandsViewModel();
             Application.Current.MainPage = new MasterPage();
