@@ -356,5 +356,10 @@
         {
             get { return Resource.PasswordError; }
         }
+
+        public static string ErrorChangingPassword
+        {
+            get { return Resource.ErrorChangingPassword; }
+        }
     }
 }

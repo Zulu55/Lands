@@ -357,4 +357,7 @@
   <data name="PasswordError" xml:space="preserve">
     <value>La contraseña actual es incorrecta</value>
   </data>
+  <data name="ErrorChangingPassword" xml:space="preserve">
+    <value>La contraseña no pudo ser cambiada, por favor intenta más tarde.</value>
+  </data>
 </root>
