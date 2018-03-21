@@ -1,19 +1,20 @@
 ﻿namespace Lands.API.Controllers
 {
+    using Domain;
+    using Helpers;
+    using Lands.API.Models;
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
+    using Newtonsoft.Json.Linq;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Validation;
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Http;
     using System.Web.Http.Description;
-    using Domain;
-    using Helpers;
-    using Microsoft.AspNet.Identity;
-    using Microsoft.AspNet.Identity.EntityFramework;
-    using Models;
-    using Newtonsoft.Json.Linq;
 
     [RoutePrefix("api/Users")]
     public class UsersController : ApiController
@@ -27,34 +28,6 @@
         }
 
         [HttpPost]
-        [Authorize]
-        [Route("GetUserByEmail")]
-        public async Task<IHttpActionResult> GetUserByEmail(JObject form)
-        {
-            var email = string.Empty;
-            dynamic jsonObject = form;
-            try
-            {
-                email = jsonObject.Email.Value;
-            }
-            catch
-            {
-                return BadRequest("Missing parameter.");
-            }
-
-            var user = await db.Users.
-                Where(u => u.Email.ToLower() == email.ToLower()).
-                FirstOrDefaultAsync();
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(user);
-        }
-
-        [HttpPost]
-        [Authorize]
         [Route("ChangePassword")]
         public async Task<IHttpActionResult> ChangePassword(JObject form)
         {
@@ -90,6 +63,88 @@
             }
 
             return Ok("ok");
+        }
+
+        [HttpPost]
+        [Authorize]
+        [Route("GetUserByEmail")]
+        public async Task<IHttpActionResult> GetUserByEmail(JObject form)
+        {
+            var email = string.Empty;
+            dynamic jsonObject = form;
+            try
+            {
+                email = jsonObject.Email.Value;
+            }
+            catch
+            {
+                return BadRequest("Missing parameter.");
+            }
+
+            var user = await db.Users.
+                Where(u => u.Email.ToLower() == email.ToLower()).
+                FirstOrDefaultAsync();
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(user);
+        }
+
+        [HttpPost]
+        [Route("LoginFacebook")]
+        public async Task<IHttpActionResult> LoginFacebook(FacebookResponse profile)
+        {
+            try
+            {
+                var user = await db.Users.Where(u => u.Email == profile.Id).FirstOrDefaultAsync();
+                if (user == null)
+                {
+                    user = new User
+                    {
+                        Email = profile.Id,
+                        FirstName = profile.FirstName,
+                        LastName = profile.LastName,
+                        ImagePath = profile.Picture.Data.Url,
+                        UserTypeId = 2,
+                        Telephone = "...",
+                    };
+
+                    db.Users.Add(user);
+                    UsersHelper.CreateUserASP(profile.Id, "User", profile.Id);
+                }
+                else
+                {
+                    user.FirstName = profile.FirstName;
+                    user.LastName = profile.LastName;
+                    user.ImagePath = profile.Picture.Data.Url;
+                    db.Entry(user).State = EntityState.Modified;
+                }
+
+                await db.SaveChangesAsync();
+                return Ok(true);
+            }
+            catch (DbEntityValidationException e)
+            {
+                var message = string.Empty;
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    message = string.Format("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        message += string.Format("\n- Property: \"{0}\", Error: \"{1}\"",
+                            ve.PropertyName, ve.ErrorMessage);
+                    }
+                }
+
+                return BadRequest(message);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // PUT: api/Users/5
