@@ -1,4 +1,4 @@
-﻿namespace Lands.Models
+﻿namespace Lands.Domain
 {
     using System.Collections.Generic;
     using Newtonsoft.Json;
