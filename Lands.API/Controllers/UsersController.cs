@@ -1,11 +1,5 @@
 ﻿namespace Lands.API.Controllers
 {
-    using Domain;
-    using Helpers;
-    using Lands.API.Models;
-    using Microsoft.AspNet.Identity;
-    using Microsoft.AspNet.Identity.EntityFramework;
-    using Newtonsoft.Json.Linq;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
@@ -15,6 +9,12 @@
     using System.Threading.Tasks;
     using System.Web.Http;
     using System.Web.Http.Description;
+    using Domain;
+    using Helpers;
+    using Models;
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
+    using Newtonsoft.Json.Linq;
 
     [RoutePrefix("api/Users")]
     public class UsersController : ApiController
