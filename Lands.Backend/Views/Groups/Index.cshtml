@@ -17,6 +17,9 @@
         <th>
             # Teams
         </th>
+        <th>
+            # Matches
+        </th>
         <th></th>
     </tr>
 
@@ -27,6 +30,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.GroupTeams.Count)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Matches.Count)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id = item.GroupId }, new { @class = "btn btn-warning" })

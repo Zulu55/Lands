@@ -1,5 +1,7 @@
 ﻿namespace Lands.Backend.Controllers
 {
+    using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Linq;
     using System.Net;
@@ -12,6 +14,120 @@
     public class GroupsController : Controller
     {
         private LocalDataContext db = new LocalDataContext();
+
+        [HttpPost]
+        public async Task<ActionResult> EditMatch(Match match)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(match).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+                return RedirectToAction(string.Format("Details/{0}", match.GroupId));
+            }
+
+            var teams = await this.GetTeamsGroup(match.Group);
+            ViewBag.LocalId = new SelectList(teams.OrderBy(t => t.Name), "TeamId", "Name", match.LocalId);
+            ViewBag.VisitorId = new SelectList(teams.OrderBy(t => t.Name), "TeamId", "Name", match.VisitorId);
+            return View(match);
+        }
+
+        public async Task<ActionResult> EditMatch(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var match = await db.Matches.FindAsync(id);
+
+            if (match == null)
+            {
+                return HttpNotFound();
+            }
+
+            var teams = await this.GetTeamsGroup(match.Group);
+            ViewBag.LocalId = new SelectList(teams.OrderBy(t => t.Name), "TeamId", "Name", match.LocalId);
+            ViewBag.VisitorId = new SelectList(teams.OrderBy(t => t.Name), "TeamId", "Name", match.VisitorId);
+            return View(match);
+        }
+
+        public async Task<ActionResult> DeleteMatch(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var match = await db.Matches.FindAsync(id);
+
+            if (match == null)
+            {
+                return HttpNotFound();
+            }
+
+            db.Matches.Remove(match);
+            await db.SaveChangesAsync();
+            return RedirectToAction(string.Format("Details/{0}", match.GroupId));
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> AddMatch(Match match)
+        {
+            if (ModelState.IsValid)
+            {
+                match.StatusMatchId = 1;
+                db.Matches.Add(match);
+                await db.SaveChangesAsync();
+                return RedirectToAction(string.Format("Details/{0}", match.GroupId));
+            }
+
+            var group = await db.Groups.FindAsync(match.GroupId);
+            var teams = await this.GetTeamsGroup(group);
+            ViewBag.LocalId = new SelectList(teams.OrderBy(t => t.Name), "TeamId", "Name");
+            ViewBag.VisitorId = new SelectList(teams.OrderBy(t => t.Name), "TeamId", "Name");
+            return View(match);
+        }
+
+        public async Task<ActionResult> AddMatch(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var group = await db.Groups.FindAsync(id);
+
+            if (group == null)
+            {
+                return HttpNotFound();
+            }
+
+            var match = new Match
+            {
+                DateTime = DateTime.Today,
+                GroupId = group.GroupId,
+            };
+
+            var teams = await this.GetTeamsGroup(group);
+            ViewBag.LocalId = new SelectList(teams.OrderBy(t => t.Name), "TeamId", "Name");
+            ViewBag.VisitorId = new SelectList(teams.OrderBy(t => t.Name), "TeamId", "Name");
+            return View(match);
+        }
+
+        public async Task<List<Team>> GetTeamsGroup(Group group)
+        {
+            var teams = new List<Team>();
+            foreach (var item in group.GroupTeams)
+            {
+                var team = await db.Teams.FindAsync(item.TeamId);
+                if (team != null)
+                {
+                    teams.Add(team);
+                }
+            }
+
+            return teams;
+        }
 
         public async Task<ActionResult> DeleteTeam(int? id)
         {
@@ -100,11 +216,9 @@
         }
 
         // POST: Groups/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "GroupId,Name")] Group group)
+        public async Task<ActionResult> Create(Group group)
         {
             if (ModelState.IsValid)
             {
@@ -123,20 +237,21 @@
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Group group = await db.Groups.FindAsync(id);
+
+            var group = await db.Groups.FindAsync(id);
+
             if (group == null)
             {
                 return HttpNotFound();
             }
+
             return View(group);
         }
 
         // POST: Groups/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "GroupId,Name")] Group group)
+        public async Task<ActionResult> Edit(Group group)
         {
             if (ModelState.IsValid)
             {
@@ -144,6 +259,7 @@
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
+
             return View(group);
         }
 
@@ -154,11 +270,14 @@
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Group group = await db.Groups.FindAsync(id);
+
+            var group = await db.Groups.FindAsync(id);
+
             if (group == null)
             {
                 return HttpNotFound();
             }
+
             return View(group);
         }
 
@@ -167,7 +286,7 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Group group = await db.Groups.FindAsync(id);
+            var group = await db.Groups.FindAsync(id);
             db.Groups.Remove(group);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
