@@ -4,12 +4,17 @@
 
     public class DataContext : DbContext
     {
+        #region Properties
+        public DbSet<User> Users { get; set; }
+
+        public DbSet<UserType> UserTypes { get; set; }
+        #endregion
+
+        #region Constructors
         public DataContext() : base("DefaultConnection")
         {
         }
 
-        public System.Data.Entity.DbSet<Lands.Domain.User> Users { get; set; }
-
-        public System.Data.Entity.DbSet<Lands.Domain.UserType> UserTypes { get; set; }
+        #endregion
     }
 }
