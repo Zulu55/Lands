@@ -1,116 +1,123 @@
 ﻿namespace Lands.Backend.Controllers
 {
     using System.Data.Entity;
-    using System.Net;
     using System.Threading.Tasks;
+    using System.Net;
     using System.Web.Mvc;
-    using Domain;
     using Models;
+    using Domain;
 
     [Authorize(Roles = "Admin")]
-    public class StatusMatchesController : Controller
+    public class BoardsController : Controller
     {
         private LocalDataContext db = new LocalDataContext();
 
-        // GET: StatusMatches
+        // GET: Boards
         public async Task<ActionResult> Index()
         {
-            return View(await db.StatusMatches.ToListAsync());
+            var boards = db.Boards.Include(b => b.BoardStatus).Include(b => b.User);
+            return View(await boards.ToListAsync());
         }
 
-        // GET: StatusMatches/Details/5
+        // GET: Boards/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            StatusMatch statusMatch = await db.StatusMatches.FindAsync(id);
-
-            if (statusMatch == null)
+            Board board = await db.Boards.FindAsync(id);
+            if (board == null)
             {
                 return HttpNotFound();
             }
-            return View(statusMatch);
+            return View(board);
         }
 
-        // GET: StatusMatches/Create
+        // GET: Boards/Create
         public ActionResult Create()
         {
+            ViewBag.BoardStatusId = new SelectList(db.BoardStatus, "BoardStatusId", "Name");
+            ViewBag.UserId = new SelectList(db.Users, "UserId", "FirstName");
             return View();
         }
 
-        // POST: StatusMatches/Create
+        // POST: Boards/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "StatusMatchId,Name")] StatusMatch statusMatch)
+        public async Task<ActionResult> Create([Bind(Include = "BoardId,BoardStatusId,UserId,ImagePath")] Board board)
         {
             if (ModelState.IsValid)
             {
-                db.StatusMatches.Add(statusMatch);
+                db.Boards.Add(board);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            return View(statusMatch);
+            ViewBag.BoardStatusId = new SelectList(db.BoardStatus, "BoardStatusId", "Name", board.BoardStatusId);
+            ViewBag.UserId = new SelectList(db.Users, "UserId", "FirstName", board.UserId);
+            return View(board);
         }
 
-        // GET: StatusMatches/Edit/5
+        // GET: Boards/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            StatusMatch statusMatch = await db.StatusMatches.FindAsync(id);
-            if (statusMatch == null)
+            Board board = await db.Boards.FindAsync(id);
+            if (board == null)
             {
                 return HttpNotFound();
             }
-            return View(statusMatch);
+            ViewBag.BoardStatusId = new SelectList(db.BoardStatus, "BoardStatusId", "Name", board.BoardStatusId);
+            ViewBag.UserId = new SelectList(db.Users, "UserId", "FirstName", board.UserId);
+            return View(board);
         }
 
-        // POST: StatusMatches/Edit/5
+        // POST: Boards/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "StatusMatchId,Name")] StatusMatch statusMatch)
+        public async Task<ActionResult> Edit([Bind(Include = "BoardId,BoardStatusId,UserId,ImagePath")] Board board)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(statusMatch).State = EntityState.Modified;
+                db.Entry(board).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(statusMatch);
+            ViewBag.BoardStatusId = new SelectList(db.BoardStatus, "BoardStatusId", "Name", board.BoardStatusId);
+            ViewBag.UserId = new SelectList(db.Users, "UserId", "FirstName", board.UserId);
+            return View(board);
         }
 
-        // GET: StatusMatches/Delete/5
+        // GET: Boards/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            StatusMatch statusMatch = await db.StatusMatches.FindAsync(id);
-            if (statusMatch == null)
+            Board board = await db.Boards.FindAsync(id);
+            if (board == null)
             {
                 return HttpNotFound();
             }
-            return View(statusMatch);
+            return View(board);
         }
 
-        // POST: StatusMatches/Delete/5
+        // POST: Boards/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            StatusMatch statusMatch = await db.StatusMatches.FindAsync(id);
-            db.StatusMatches.Remove(statusMatch);
+            Board board = await db.Boards.FindAsync(id);
+            db.Boards.Remove(board);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

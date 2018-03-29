@@ -190,9 +190,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BoardsController.cs" />
+    <Compile Include="Controllers\BoardStatusController.cs" />
     <Compile Include="Controllers\GroupsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PredictionsController.cs" />
     <Compile Include="Controllers\StatusMatchesController.cs" />
     <Compile Include="Controllers\TeamsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -334,6 +337,21 @@
     <Content Include="Views\StatusMatches\Index.cshtml" />
     <Content Include="Views\Groups\AddMatch.cshtml" />
     <Content Include="Views\Groups\EditMatch.cshtml" />
+    <Content Include="Views\BoardStatus\Create.cshtml" />
+    <Content Include="Views\BoardStatus\Delete.cshtml" />
+    <Content Include="Views\BoardStatus\Details.cshtml" />
+    <Content Include="Views\BoardStatus\Edit.cshtml" />
+    <Content Include="Views\BoardStatus\Index.cshtml" />
+    <Content Include="Views\Boards\Create.cshtml" />
+    <Content Include="Views\Boards\Delete.cshtml" />
+    <Content Include="Views\Boards\Details.cshtml" />
+    <Content Include="Views\Boards\Edit.cshtml" />
+    <Content Include="Views\Boards\Index.cshtml" />
+    <Content Include="Views\Predictions\Create.cshtml" />
+    <Content Include="Views\Predictions\Delete.cshtml" />
+    <Content Include="Views\Predictions\Details.cshtml" />
+    <Content Include="Views\Predictions\Edit.cshtml" />
+    <Content Include="Views\Predictions\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

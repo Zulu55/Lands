@@ -2,6 +2,7 @@
 {
     using Newtonsoft.Json;
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     public class Match
@@ -40,5 +41,8 @@
 
         [JsonIgnore]
         public virtual StatusMatch StatusMatch { get; set; }
+
+        [JsonIgnore]
+        public virtual ICollection<Prediction> Predictions { get; set; }
     }
 }
