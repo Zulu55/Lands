@@ -1,5 +1,7 @@
 ﻿namespace Lands.Domain
 {
+    using Newtonsoft.Json;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
@@ -31,5 +33,8 @@
                     ImagePath.Substring(1));
             }
         }
+
+        [JsonIgnore]
+        public virtual ICollection<GroupTeam> GroupTeams { get; set; }
     }
 }

@@ -4,6 +4,5 @@
 
     public class LocalDataContext : DataContext
     {
-        public System.Data.Entity.DbSet<Lands.Domain.Team> Teams { get; set; }
     }
 }

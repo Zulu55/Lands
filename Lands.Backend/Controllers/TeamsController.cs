@@ -8,6 +8,7 @@
     using Helpers;
     using Models;
 
+    [Authorize(Roles = "Admin")]
     public class TeamsController : Controller
     {
         private LocalDataContext db = new LocalDataContext();

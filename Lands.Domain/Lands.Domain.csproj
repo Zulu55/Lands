@@ -51,6 +51,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataContext.cs" />
+    <Compile Include="Group.cs" />
+    <Compile Include="GroupTeam.cs" />
     <Compile Include="Response.cs" />
     <Compile Include="Team.cs" />
     <Compile Include="User.cs" />
