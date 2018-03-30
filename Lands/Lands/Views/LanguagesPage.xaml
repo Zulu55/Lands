@@ -32,7 +32,7 @@
                                 </Grid.ColumnDefinitions>
                                 <Label 
                                     Grid.Column="0"
-                                    Text="{Binding Iso6392}"
+                                    Text="{Binding Iso6391}"
                                     TextColor="Black">
                                 </Label>
                                 <Label 
