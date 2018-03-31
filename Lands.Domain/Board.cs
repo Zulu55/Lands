@@ -3,6 +3,7 @@
     using Newtonsoft.Json;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public class Board
     {
@@ -16,6 +17,9 @@
         [Display(Name = "Image")]
         public string ImagePath { get; set; }
 
+        [NotMapped]
+        public byte[] ImageArray { get; set; }
+
         [Display(Name = "Image")]
         public string ImageFullPath
         {
@@ -27,7 +31,7 @@
                 }
 
                 return string.Format(
-                    "https://landsbackend1.azurewebsites.net/{0}",
+                    "http://landsapi1.azurewebsites.net{0}",
                     ImagePath.Substring(1));
             }
         }

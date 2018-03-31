@@ -21,7 +21,7 @@
         {
             var resonse = new List<MatchResponse>();
             var marches = await db.Matches.ToListAsync();
-            foreach (var match in marches.OrderBy(m => m.DateTime))
+            foreach (var match in marches.OrderBy(m => m.StatusMatchId).ThenBy(m => m.DateTime))
             {
                 resonse.Add(new MatchResponse
                 {

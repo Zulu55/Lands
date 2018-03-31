@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Boards</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -12,10 +12,10 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.BoardStatus.Name)
+            Board Status
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.User.FirstName)
+            @Html.DisplayNameFor(model => model.User.FullName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.ImagePath)
@@ -29,10 +29,13 @@
             @Html.DisplayFor(modelItem => item.BoardStatus.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.User.FirstName)
+            @Html.DisplayFor(modelItem => item.User.FullName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ImagePath)
+            @if (!string.IsNullOrEmpty(item.ImagePath))
+            {
+                <img src="@Url.Content(item.ImageFullPath)" alt="Image" style="width:300px;height:300px;max-width: 100%; height: auto;" />
+            }   
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.BoardId }) |

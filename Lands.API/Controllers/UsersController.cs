@@ -28,6 +28,7 @@
         }
 
         [HttpPost]
+        [Authorize]
         [Route("ChangePassword")]
         public async Task<IHttpActionResult> ChangePassword(JObject form)
         {
@@ -215,6 +216,7 @@
         }
 
         // DELETE: api/Users/5
+        [Authorize]
         [ResponseType(typeof(User))]
         public async Task<IHttpActionResult> DeleteUser(int id)
         {
