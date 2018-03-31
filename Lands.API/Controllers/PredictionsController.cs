@@ -123,7 +123,34 @@
                 return BadRequest(ModelState);
             }
 
-            db.Predictions.Add(prediction);
+            var match = await db.Matches.FindAsync(prediction.MatchId);
+            if (match == null)
+            {
+                return BadRequest("Match no found.");
+            }
+
+            if (match.StatusMatchId != 1)
+            {
+                return BadRequest("No prediction available for this match.");
+            }
+
+            if (match.DateTime <= DateTime.Now)
+            {
+                return BadRequest("It's too late to make a prediction for this match.");
+            }
+
+            var oldPrediction = await db.Predictions.FindAsync(prediction.PredictionId);
+            if (oldPrediction == null)
+            {
+                db.Predictions.Add(prediction);
+            }
+            else
+            {
+                oldPrediction.LocalGoals = prediction.LocalGoals;
+                oldPrediction.VisitorGoals = prediction.VisitorGoals;
+                db.Entry(oldPrediction).State = EntityState.Modified;
+            }
+
             await db.SaveChangesAsync();
 
             return CreatedAtRoute("DefaultApi", new { id = prediction.PredictionId }, prediction);

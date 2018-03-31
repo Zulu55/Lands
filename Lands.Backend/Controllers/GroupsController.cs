@@ -16,6 +16,93 @@
         private LocalDataContext db = new LocalDataContext();
 
         [HttpPost]
+        public async Task<ActionResult> CloseMatch(Match match)
+        {
+            using (var transacction = db.Database.BeginTransaction())
+            {
+                try
+                {
+                    // Update match
+                    var oldMatch = await db.Matches.FindAsync(match.MatchId);
+                    oldMatch.LocalGoals = match.LocalGoals;
+                    oldMatch.VisitorGoals = match.VisitorGoals;
+                    oldMatch.StatusMatchId = 2; // Closed
+                    db.Entry(oldMatch).State = EntityState.Modified;
+
+                    var statusMatch = this.GetStatus(oldMatch.LocalGoals.Value, oldMatch.VisitorGoals.Value);
+
+                    // Update predictions
+                    var predictions = await db.Predictions
+                        .Where(p => p.MatchId == match.MatchId)
+                        .ToListAsync();
+                    foreach (var prediction in predictions)
+                    {
+                        var points = 0;
+                        if (prediction.LocalGoals == oldMatch.LocalGoals &&
+                            prediction.VisitorGoals == oldMatch.VisitorGoals)
+                        {
+                            points = 3;
+                        }
+                        else
+                        {
+                            var statusPrediction = this.GetStatus(prediction.LocalGoals, prediction.VisitorGoals);
+                            if (statusMatch == statusPrediction)
+                            {
+                                points = 1;
+                            }
+                        }
+
+                        prediction.Points = points;
+                        db.Entry(prediction).State = EntityState.Modified;
+                    }
+
+                    await db.SaveChangesAsync();
+                    transacction.Commit();
+
+                    return RedirectToAction(string.Format("Details/{0}", oldMatch.GroupId));
+                }
+                catch (Exception ex)
+                {
+                    transacction.Rollback();
+                    ModelState.AddModelError(string.Empty, ex.Message);
+                    return View(match);
+                }
+            }
+        }
+
+        private int GetStatus(int localGoals, int visitorGoals)
+        {
+            if (localGoals > visitorGoals)
+            {
+                return 1; // Local win
+            }
+
+            if (visitorGoals > localGoals)
+            {
+                return 2; // Visitor win
+            }
+
+            return 3; // Draw
+        }
+
+        public async Task<ActionResult> CloseMatch(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var match = await db.Matches.FindAsync(id);
+
+            if (match == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(match);
+        }
+
+        [HttpPost]
         public async Task<ActionResult> EditMatch(Match match)
         {
             if (ModelState.IsValid)

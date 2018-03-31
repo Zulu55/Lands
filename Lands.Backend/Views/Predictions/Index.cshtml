@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Predictions</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -12,13 +12,16 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Board.ImagePath)
+            Board
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Match.MatchId)
+            Local
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.User.FirstName)
+            Visitor
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User.FullName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.LocalGoals)
@@ -35,13 +38,16 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Board.ImagePath)
+            @Html.DisplayFor(modelItem => item.Board.BoardId)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Match.MatchId)
+            @Html.DisplayFor(modelItem => item.Match.Local.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.User.FirstName)
+            @Html.DisplayFor(modelItem => item.Match.Visitor.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.FullName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.LocalGoals)
@@ -53,9 +59,9 @@
             @Html.DisplayFor(modelItem => item.Points)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.PredictionId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.PredictionId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.PredictionId })
+            @Html.ActionLink("Edit", "Edit", new { id = item.PredictionId }) |
+            @Html.ActionLink("Details", "Details", new { id = item.PredictionId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.PredictionId })
         </td>
     </tr>
 }
