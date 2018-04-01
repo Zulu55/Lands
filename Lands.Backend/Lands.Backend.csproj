@@ -224,9 +224,8 @@
     <Content Include="Content\Teams\Argentina.png" />
     <Content Include="Content\Teams\Australia.png" />
     <Content Include="Content\Teams\Belgium.png" />
-    <Content Include="Content\Teams\Brazil.svg" />
+    <Content Include="Content\Teams\Brazil.jpg" />
     <Content Include="Content\Teams\Colombia.png" />
-    <Content Include="Content\Teams\CostaRica.html" />
     <Content Include="Content\Teams\CostaRica.png" />
     <Content Include="Content\Teams\Croatia.png" />
     <Content Include="Content\Teams\Denmark.png" />
@@ -242,7 +241,7 @@
     <Content Include="Content\Teams\Morocco.gif" />
     <Content Include="Content\Teams\Nigeria.png" />
     <Content Include="Content\Teams\Panama.jpg" />
-    <Content Include="Content\Teams\Peru.svg" />
+    <Content Include="Content\Teams\Peru.jpg" />
     <Content Include="Content\Teams\Poland.png" />
     <Content Include="Content\Teams\Portugal.png" />
     <Content Include="Content\Teams\Russia.png" />
@@ -263,7 +262,9 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Properties\PublishProfiles\LandsAPI - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\LandsBackend1 - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\russiabackend - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

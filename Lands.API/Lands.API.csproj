@@ -242,6 +242,7 @@
     <Compile Include="Helpers\UsersHelper.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Hit.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\MatchResponse.cs" />
     <Compile Include="Models\PredictionResponse.cs" />
@@ -287,6 +288,7 @@
     </Content>
     <None Include="Properties\PublishProfiles\LandsAPI - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\LandsAPI1 - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\russiaapi - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

@@ -18,10 +18,32 @@
     {
         private DataContext db = new DataContext();
 
-        // GET: api/Predictions
         public IQueryable<Prediction> GetPredictions()
         {
             return db.Predictions;
+        }
+
+        [Route("GetHits/{userId}")]
+        public async Task<IHttpActionResult> GetHits(int userId)
+        {
+            var hits = new List<Hit>();
+            var predictions = await db.Predictions.Where(p => p.Points != null).ToListAsync();
+            foreach (var prediction in predictions)
+            {
+                hits.Add(new Hit
+                {
+                    BoardId = prediction.BoardId,
+                    LocalGoals = prediction.LocalGoals,
+                    Match =  this.ToMatchResponse(prediction.Match),
+                    MatchId = prediction.MatchId,
+                    Points = prediction.Points.Value,
+                    PredictionId = prediction.PredictionId,
+                    UserId = prediction.UserId,
+                    VisitorGoals = prediction.VisitorGoals,
+                });
+            }
+
+            return Ok(hits);
         }
 
         [Route("GetRanking")]
@@ -74,8 +96,6 @@
             return Ok(responses.OrderBy(r => r.RankingId));
         }
 
-
-        // GET: api/Predictions/5
         [Route("GetPrediction/{userId}/{boardId}")]
         public async Task<IHttpActionResult> GetPrediction(int userId, int boardId)
         {
@@ -130,7 +150,6 @@
             };
         }
 
-        // PUT: api/Predictions/5
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> PutPrediction(int id, Prediction prediction)
         {
@@ -165,7 +184,6 @@
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Predictions
         [ResponseType(typeof(Prediction))]
         public async Task<IHttpActionResult> PostPrediction(Prediction prediction)
         {
@@ -207,7 +225,6 @@
             return CreatedAtRoute("DefaultApi", new { id = prediction.PredictionId }, prediction);
         }
 
-        // DELETE: api/Predictions/5
         [ResponseType(typeof(Prediction))]
         public async Task<IHttpActionResult> DeletePrediction(int id)
         {
