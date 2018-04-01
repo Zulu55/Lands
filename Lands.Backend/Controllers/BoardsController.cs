@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
     using System.Net;
     using System.Web.Mvc;
+    using System.Linq;
     using Models;
     using Domain;
 
@@ -15,7 +16,7 @@
         // GET: Boards
         public async Task<ActionResult> Index()
         {
-            var boards = db.Boards.Include(b => b.BoardStatus).Include(b => b.User);
+            var boards = db.Boards.OrderBy(b => b.BoardStatusId).Include(b => b.BoardStatus).Include(b => b.User);
             return View(await boards.ToListAsync());
         }
 

@@ -29,7 +29,7 @@
                 }
 
                 return string.Format(
-                    "https://landsbackend1.azurewebsites.net{0}",
+                    "https://russiabackend.azurewebsites.net{0}",
                     ImagePath.Substring(1));
             }
         }
