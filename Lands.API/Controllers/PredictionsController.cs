@@ -24,6 +24,57 @@
             return db.Predictions;
         }
 
+        [Route("GetRanking")]
+        public async Task<IHttpActionResult> GetRanking()
+        {
+            var responses = new List<Ranking>();
+            var predictions = await db.Predictions.Where(p => p.Points != null).ToListAsync();
+
+            var preRankings =  predictions.Select(p => new PreRanking
+            {
+                BoardId = p.BoardId,
+                UserId = p.UserId,
+            }).ToList();
+
+            preRankings = preRankings.OrderBy(p => p.UserId).ThenBy(p => p.BoardId).ToList();
+
+            int i = 0;
+            while (i < preRankings.Count)
+            {
+                var preUserId = preRankings[i].UserId;
+                var preBoard = preRankings[i].BoardId;
+                while (i < preRankings.Count &&
+                       preUserId == preRankings[i].UserId && 
+                       preBoard == preRankings[i].BoardId)
+                {
+                    i++;
+                }
+
+                var user = await db.Users.FindAsync(preUserId);
+                var board = await db.Boards.FindAsync(preBoard);
+                var points = predictions.
+                    Where(p => p.UserId == preUserId && p.BoardId == preBoard).
+                    Sum(p => p.Points);
+                responses.Add(new Ranking
+                {
+                    Board = board,
+                    Points = points.Value,
+                    User = user,
+                });
+
+            }
+
+            i = 1;
+            foreach (var response in responses.OrderByDescending(p => p.Points))
+            {
+                response.RankingId = i;
+                i++;
+            }
+
+            return Ok(responses.OrderBy(r => r.RankingId));
+        }
+
+
         // GET: api/Predictions/5
         [Route("GetPrediction/{userId}/{boardId}")]
         public async Task<IHttpActionResult> GetPrediction(int userId, int boardId)
