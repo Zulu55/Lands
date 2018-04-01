@@ -12,7 +12,7 @@
     using Domain;
     using Models;
 
-    [Authorize]
+    //[Authorize]
     [RoutePrefix("api/Predictions")]
     public class PredictionsController : ApiController
     {
@@ -27,7 +27,9 @@
         public async Task<IHttpActionResult> GetHits(int userId)
         {
             var hits = new List<Hit>();
-            var predictions = await db.Predictions.Where(p => p.Points != null).ToListAsync();
+            var predictions = await db.Predictions.
+                Where(p => p.UserId == userId && p.Points != null).
+                ToListAsync();
             foreach (var prediction in predictions)
             {
                 hits.Add(new Hit
