@@ -94,6 +94,76 @@
         }
 
         [HttpPost]
+        [Route("LoginInstagram")]
+        public async Task<IHttpActionResult> LoginInstagram(InstagramResponse profile)
+        {
+            try
+            {
+                var firstName = string.Empty;
+                var lastName = string.Empty;
+                var fullName = profile.UserData.FullName;
+                var posSpace = fullName.IndexOf(' ');
+                if (posSpace == -1)
+                {
+                    firstName = fullName;
+                    lastName = fullName;
+                }
+                else
+                {
+                    firstName = fullName.Substring(0, posSpace);
+                    lastName = fullName.Substring(posSpace + 1);
+                }
+
+                var user = await db.Users.Where(u => u.Email == profile.UserData.Id).FirstOrDefaultAsync();
+                if (user == null)
+                {
+                    user = new User
+                    {
+                        Email = profile.UserData.Id,
+                        FirstName = firstName,
+                        LastName = lastName,
+                        ImagePath = profile.UserData.ProfilePicture,
+                        UserTypeId = 4,
+                        Telephone = "...",
+                    };
+
+                    db.Users.Add(user);
+                    UsersHelper.CreateUserASP(profile.UserData.Id, "User", profile.UserData.Id);
+                }
+                else
+                {
+                    user.FirstName = firstName;
+                    user.LastName = lastName;
+                    user.ImagePath = profile.UserData.ProfilePicture;
+                    db.Entry(user).State = EntityState.Modified;
+                }
+
+                await db.SaveChangesAsync();
+                return Ok(true);
+            }
+            catch (DbEntityValidationException e)
+            {
+                var message = string.Empty;
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    message = string.Format("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        message += string.Format("\n- Property: \"{0}\", Error: \"{1}\"",
+                            ve.PropertyName, ve.ErrorMessage);
+                    }
+                }
+
+                return BadRequest(message);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost]
         [Route("LoginFacebook")]
         public async Task<IHttpActionResult> LoginFacebook(FacebookResponse profile)
         {
@@ -193,6 +263,14 @@
         [ResponseType(typeof(User))]
         public async Task<IHttpActionResult> PostUser(User model)
         {
+            var oldUser = await db.Users.
+                Where(u => u.Email.ToLower().Equals(model.Email.ToLower())).
+                FirstOrDefaultAsync();
+            if (oldUser != null)
+            {
+                return BadRequest("Error 001");
+            }
+
             if (model.ImageArray != null && model.ImageArray.Length > 0)
             {
                 var stream = new MemoryStream(model.ImageArray);

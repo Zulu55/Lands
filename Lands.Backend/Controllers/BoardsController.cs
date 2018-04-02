@@ -16,7 +16,7 @@
         // GET: Boards
         public async Task<ActionResult> Index()
         {
-            var boards = db.Boards.OrderBy(b => b.BoardStatusId).Include(b => b.BoardStatus).Include(b => b.User);
+            var boards = db.Boards.Where(b => b.BoardStatusId == 1).Include(b => b.BoardStatus).Include(b => b.User);
             return View(await boards.ToListAsync());
         }
 

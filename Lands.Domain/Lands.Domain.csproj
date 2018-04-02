@@ -55,6 +55,7 @@
     <Compile Include="DataContext.cs" />
     <Compile Include="Group.cs" />
     <Compile Include="GroupTeam.cs" />
+    <Compile Include="InstagramResponse.cs" />
     <Compile Include="Match.cs" />
     <Compile Include="MatchesMap.cs" />
     <Compile Include="Prediction.cs" />
