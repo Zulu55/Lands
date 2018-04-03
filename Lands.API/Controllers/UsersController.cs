@@ -28,6 +28,65 @@
         }
 
         [HttpPost]
+        [Route("PasswordRecovery")]
+        public async Task<IHttpActionResult> PasswordRecovery(JObject form)
+        {
+            try
+            {
+                var email = string.Empty;
+                dynamic jsonObject = form;
+
+                try
+                {
+                    email = jsonObject.Email.Value;
+                }
+                catch
+                {
+                    return BadRequest("Incorrect call.");
+                }
+
+                var user = await db.Users
+                    .Where(u => u.Email.ToLower() == email.ToLower())
+                    .FirstOrDefaultAsync();
+                if (user == null)
+                {
+                    return BadRequest("Error 001");
+                }
+
+                var userContext = new ApplicationDbContext();
+                var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(userContext));
+                var userASP = userManager.FindByEmail(email);
+                if (userASP == null)
+                {
+                    return BadRequest("Error 001");
+                }
+
+                var random = new Random();
+                var newPassword = string.Format("{0}", random.Next(100000, 999999));
+                var response1 = userManager.RemovePassword(userASP.Id);
+                var response2 = await userManager.AddPasswordAsync(userASP.Id, newPassword);
+                if (response2.Succeeded)
+                {
+                    var subject = "Russia - Password Recovery";
+                    var body = string.Format(@"
+                        <h1>Russia App - Password Recovery</h1>
+                        <p>Your new password is: <strong>{0}</strong></p>
+                        <p>Please, don't forget change it for one easy remember for you.",
+                        newPassword);
+
+                    await MailHelper.SendMail(email, subject, body);
+                    return Ok(true);
+                }
+
+                return BadRequest("Error 002");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost]
         [Authorize]
         [Route("ChangePassword")]
         public async Task<IHttpActionResult> ChangePassword(JObject form)
@@ -91,6 +150,76 @@
             }
 
             return Ok(user);
+        }
+
+        [HttpPost]
+        [Route("LoginTwitter")]
+        public async Task<IHttpActionResult> LoginTwitter(TwitterResponse profile)
+        {
+            try
+            {
+                var firstName = string.Empty;
+                var lastName = string.Empty;
+                var fullName = profile.Name;
+                var posSpace = fullName.IndexOf(' ');
+                if (posSpace == -1)
+                {
+                    firstName = fullName;
+                    lastName = fullName;
+                }
+                else
+                {
+                    firstName = fullName.Substring(0, posSpace);
+                    lastName = fullName.Substring(posSpace + 1);
+                }
+
+                var user = await db.Users.Where(u => u.Email == profile.IdStr).FirstOrDefaultAsync();
+                if (user == null)
+                {
+                    user = new User
+                    {
+                        Email = profile.IdStr,
+                        FirstName = firstName,
+                        LastName = lastName,
+                        ImagePath = profile.ProfileImageUrl,
+                        UserTypeId = 3,
+                        Telephone = "...",
+                    };
+
+                    db.Users.Add(user);
+                    UsersHelper.CreateUserASP(profile.IdStr, "User", profile.IdStr);
+                }
+                else
+                {
+                    user.FirstName = firstName;
+                    user.LastName = lastName;
+                    user.ImagePath = profile.ProfileImageUrl;
+                    db.Entry(user).State = EntityState.Modified;
+                }
+
+                await db.SaveChangesAsync();
+                return Ok(true);
+            }
+            catch (DbEntityValidationException e)
+            {
+                var message = string.Empty;
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    message = string.Format("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        message += string.Format("\n- Property: \"{0}\", Error: \"{1}\"",
+                            ve.PropertyName, ve.ErrorMessage);
+                    }
+                }
+
+                return BadRequest(message);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPost]
