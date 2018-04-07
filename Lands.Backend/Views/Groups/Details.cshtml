@@ -1,0 +1,66 @@
+﻿@model Lands.Domain.Group
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Group</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.GroupId }, new { @class = "btn btn-warning" })
+    @Html.ActionLink("Back to List", "Index", new { }, new { @class = "btn btn-success" })
+    @Html.ActionLink("Add Team", "AddTeam", new { id = Model.GroupId }, new { @class = "btn btn-primary" })
+</p>
+
+<h4>Teams</h4>
+@if (Model.GroupTeams.Count == 0)
+{
+    <h5>Not teams added yet.</h5>
+}
+else
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.GroupTeams.FirstOrDefault().Team.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GroupTeams.FirstOrDefault().Team.ImagePath)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.GroupTeams)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Team.Name)
+                </td>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.Team.ImagePath))
+                    {
+                        <img src="@Url.Content(item.Team.ImagePath)" alt="Image" style="width:80px;height:80px;max-width: 100%; height: auto;" />
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "DeleteTeam", new { id = item.TeamId }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+    </table>
+}
+
