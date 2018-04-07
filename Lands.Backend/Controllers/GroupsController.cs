@@ -190,6 +190,7 @@
                 return HttpNotFound();
             }
 
+            match.DateTime = match.DateTime.ToLocalTime();
             return View(match);
         }
 
@@ -198,6 +199,7 @@
         {
             if (ModelState.IsValid)
             {
+                match.DateTime = match.DateTime.ToUniversalTime();
                 db.Entry(match).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction(string.Format("Details/{0}", match.GroupId));
@@ -223,6 +225,7 @@
                 return HttpNotFound();
             }
 
+            match.DateTime = match.DateTime.ToLocalTime();
             var teams = await this.GetTeamsGroup(match.Group);
             ViewBag.LocalId = new SelectList(teams.OrderBy(t => t.Name), "TeamId", "Name", match.LocalId);
             ViewBag.VisitorId = new SelectList(teams.OrderBy(t => t.Name), "TeamId", "Name", match.VisitorId);
@@ -382,6 +385,11 @@
             if (group == null)
             {
                 return HttpNotFound();
+            }
+
+            foreach (var match in group.Matches)
+            {
+                match.DateTime = match.DateTime.ToLocalTime();
             }
 
             return View(group);

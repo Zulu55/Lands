@@ -194,6 +194,8 @@
                 return BadRequest("No prediction available for this match.");
             }
 
+            match.DateTime = match.DateTime.ToLocalTime();
+
             if (match.DateTime <= DateTime.Now)
             {
                 return BadRequest("It's too late to make a prediction for this match.");
