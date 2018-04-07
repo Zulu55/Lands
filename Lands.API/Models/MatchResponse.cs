@@ -1,6 +1,7 @@
 ﻿namespace Lands.API.Models
 {
     using System;
+    using System.Collections.Generic;
     using Domain;
 
     public class MatchResponse
@@ -28,5 +29,7 @@
         public Team Visitor { get; set; }
 
         public StatusMatch StatusMatch { get; set; }
+
+        public List<PredictionResponse> Predictions { get; set; }
     }
 }

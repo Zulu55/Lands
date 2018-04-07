@@ -1,5 +1,6 @@
 ﻿namespace Lands.API.Controllers
 {
+    using System;
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
@@ -11,10 +12,65 @@
     using Domain;
     using Models;
 
-    [Authorize]
+    //[Authorize]
+    [RoutePrefix("api/Matches")]
     public class MatchesController : ApiController
     {
         private DataContext db = new DataContext();
+
+        [Route("GetClosedMatches")]
+        public async Task<IHttpActionResult> GetClosedMatches()
+        {
+            var responses = new List<MatchResponse>();
+            var matches = await db.Matches.Where(m => m.StatusMatchId != 1).ToListAsync();
+            foreach (var match in matches)
+            {
+                var predictionResponses = new List<PredictionResponse>();
+
+                foreach (var prediction in match.Predictions)
+                {
+                    predictionResponses.Add(new PredictionResponse
+                    {
+                        BoardId = prediction.BoardId,
+                        LocalGoals = prediction.LocalGoals,
+                        Match = this.ToMatchResponse(prediction.Match),
+                        MatchId = prediction.MatchId,
+                        Points = prediction.Points,
+                        PredictionId = prediction.PredictionId,
+                        UserId = prediction.UserId,
+                        VisitorGoals = prediction.VisitorGoals,
+                    });
+                }
+
+                responses.Add(new MatchResponse
+                {
+                    DateTime = match.DateTime,
+                    Group = match.Group,
+                    GroupId = match.GroupId,
+                    Local = match.Local,
+                    LocalGoals = match.LocalGoals,
+                    LocalId = match.LocalId,
+                    MatchId = match.MatchId,
+                    StatusMatch = match.StatusMatch,
+                    StatusMatchId = match.StatusMatchId,
+                    Visitor = match.Visitor,
+                    VisitorGoals = match.VisitorGoals,
+                    VisitorId = match.VisitorId,
+                    Predictions = predictionResponses,
+                });
+            }
+
+            return Ok(responses);
+        }
+
+        private MatchResponse ToMatchResponse(Match match)
+        {
+            return new MatchResponse
+            {
+                // TODO: Here go
+            };
+        }
+
 
         // GET: api/Matches
         public async Task<IHttpActionResult> GetMatches()

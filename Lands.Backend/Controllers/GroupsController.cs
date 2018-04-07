@@ -8,12 +8,103 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Domain;
+    using Microsoft.Azure.NotificationHubs;
     using Models;
 
     [Authorize(Roles = "Admin")]
     public class GroupsController : Controller
     {
         private LocalDataContext db = new LocalDataContext();
+        private NotificationHubClient hub;
+
+        public GroupsController()
+        {
+            var listenConnectionString = "Endpoint=" +
+                "sb://russiahub.servicebus.windows.net/;SharedAccessKeyName=" +
+                "DefaultFullSharedAccessSignature;" +
+                "SharedAccessKey=XXLIqplD13sRQ0N8Ex5ZBSsuGGlnFDJy+r7ai+MOQfs=";
+            var notificationHubName = "russia";
+            this.hub = NotificationHubClient.CreateClientFromConnectionString(
+                listenConnectionString, 
+                notificationHubName);
+        }
+
+        public async Task<ActionResult> NotificateUsers(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var match = await db.Matches.FindAsync(id);
+
+            if (match == null)
+            {
+                return HttpNotFound();
+            }
+
+            var tags = new List<string>();
+            var boards = await db.Boards.ToListAsync();
+            foreach (var board in boards)
+            {
+                var prediction = await db.Predictions.Where(p => p.BoardId == board.BoardId && p.MatchId == match.MatchId).FirstOrDefaultAsync();
+                if (prediction == null)
+                {
+                    tags.Add(string.Format("userId:{0}", board.UserId));
+                }
+            }
+
+            if (tags.Count > 0)
+            {
+                await this.SendNotificationNoPoints(tags.Distinct().ToList(), match, "alert");
+            }
+
+            return RedirectToAction(string.Format("Details/{0}", match.GroupId));
+        }
+
+        private async Task SendNotificationNoPoints(List<string> tags, Match match, string type)
+        {
+            var message = string.Format(
+                "{0} Vs. {1}",
+                match.Local.Name, 
+                match.Visitor.Name);
+            await this.SendNotification(tags, message, type);
+        }
+
+        private async Task SendNotification(List<string> tags, string message, string type)
+        {
+            try
+            {
+                do
+                {
+                    if (tags.Count <= 20)
+                    {
+                        await hub.SendGcmNativeNotificationAsync("{ \"data\" : " +
+                            "{\"Message\":\"" + message + "\", " +
+                            "\"Type\":\"" + type + "\"}}", tags);
+                        tags.Clear();
+                    }
+                    else
+                    {
+                        var tags20 = new List<string>();
+                        for (int i = 0; i < 20; i++)
+                        {
+                            tags20.Add(tags[i]);
+                        }
+
+                        tags.RemoveRange(0, 20);
+                        await hub.SendGcmNativeNotificationAsync("{ \"data\" : " +
+                            "{\"Message\":\"" + message + "\", " +
+                            "\"Type\":\"" + type + "\"}}", tags20);
+                    }
+                } while (tags.Count > 0);
+
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+            }
+        }
 
         [HttpPost]
         public async Task<ActionResult> CloseMatch(Match match)

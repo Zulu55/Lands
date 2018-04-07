@@ -27,114 +27,108 @@
     @Html.ActionLink("Add Match", "AddMatch", new { id = Model.GroupId }, new { @class = "btn btn-default" })
 </p>
 
-<div class="row">
-    <div class="col-md-4">
-        <h4>Teams</h4>
-        @if (Model.GroupTeams.Count == 0)
+<h4>Teams</h4>
+@if (Model.GroupTeams.Count == 0)
+{
+    <h4>No teams added yet.</h4>
+}
+else
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.GroupTeams.FirstOrDefault().Team.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GroupTeams.FirstOrDefault().Team.ImagePath)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.GroupTeams)
         {
-            <h4>No teams added yet.</h4>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Team.Name)
+                </td>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.Team.ImagePath))
+                    {
+                        <img src="@Url.Content(item.Team.ImagePath)" alt="Image" style="width:90px;height:90px;max-width: 100%; height: auto;" />
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "DeleteTeam", new { id = item.GroupTeamId }, new { @class = "btn btn-danger", onclick = "return confirm('Are you sure to delete the team in this group?')" })
+                </td>
+            </tr>
         }
-        else
+    </table>
+}
+<h4>Matches</h4>
+@if (Model.Matches.Count == 0)
+{
+<h4>No matches added yet.</h4>
+}
+else
+{
+    <table class="table">
+        <tr>
+            <th>
+                Status
+            </th>
+            <th>
+                Local
+            </th>
+            <th>
+                Visitor
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Matches.FirstOrDefault().LocalGoals)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Matches.FirstOrDefault().VisitorGoals)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Matches.FirstOrDefault().DateTime)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.Matches)
         {
-            <table class="table">
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.GroupTeams.FirstOrDefault().Team.Name)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.GroupTeams.FirstOrDefault().Team.ImagePath)
-                    </th>
-                    <th></th>
-                </tr>
-
-                @foreach (var item in Model.GroupTeams)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Team.Name)
-                        </td>
-                        <td>
-                            @if (!string.IsNullOrEmpty(item.Team.ImagePath))
-                            {
-                                <img src="@Url.Content(item.Team.ImagePath)" alt="Image" style="width:90px;height:90px;max-width: 100%; height: auto;" />
-                            }
-                        </td>
-                        <td>
-                            @Html.ActionLink("Delete", "DeleteTeam", new { id = item.GroupTeamId }, new { @class = "btn btn-danger", onclick = "return confirm('Are you sure to delete the team in this group?')" })
-                        </td>
-                    </tr>
-                }
-            </table>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StatusMatch.Name)
+                </td>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.Local.ImagePath))
+                    {
+                        <img src="@Url.Content(item.Local.ImagePath)" alt="Image" style="width:50px;height:50px;max-width: 100%; height: auto;" />
+                    }
+                </td>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.Visitor.ImagePath))
+                    {
+                        <img src="@Url.Content(item.Visitor.ImagePath)" alt="Image" style="width:50px;height:50px;max-width: 100%; height: auto;" />
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LocalGoals)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VisitorGoals)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateTime)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditMatch", new { id = item.MatchId }, new { @class = "btn btn-warning" })
+                    @Html.ActionLink("Notificate", "NotificateUsers", new { id = item.MatchId }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("C. Prediction", "ClosePredictions", new { id = item.MatchId }, new { @class = "btn btn-default" })
+                    @Html.ActionLink("C. Match", "CloseMatch", new { id = item.MatchId }, new { @class = "btn btn-info" })
+                    @Html.ActionLink("Delete", "DeleteMatch", new { id = item.MatchId }, new { @class = "btn btn-danger", onclick = "return confirm('Are you sure to delete the team in this match?')" })
+                </td>
+            </tr>
         }
-    </div>
-    <div class="col-md-8">
-        <h4>Matches</h4>
-        @if (Model.Matches.Count == 0)
-    {
-        <h4>No matches added yet.</h4>
-        }
-        else
-        {
-            <table class="table">
-                <tr>
-                    <th>
-                        Status
-                    </th>
-                    <th>
-                        Local
-                    </th>
-                    <th>
-                        Visitor
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Matches.FirstOrDefault().LocalGoals)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Matches.FirstOrDefault().VisitorGoals)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Matches.FirstOrDefault().DateTime)
-                    </th>
-                    <th></th>
-                </tr>
-
-                @foreach (var item in Model.Matches)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.StatusMatch.Name)
-                        </td>
-                        <td>
-                            @if (!string.IsNullOrEmpty(item.Local.ImagePath))
-                            {
-                                <img src="@Url.Content(item.Local.ImagePath)" alt="Image" style="width:50px;height:50px;max-width: 100%; height: auto;" />
-                            }
-                        </td>
-                        <td>
-                            @if (!string.IsNullOrEmpty(item.Visitor.ImagePath))
-                            {
-                                <img src="@Url.Content(item.Visitor.ImagePath)" alt="Image" style="width:50px;height:50px;max-width: 100%; height: auto;" />
-                            }
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.LocalGoals)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.VisitorGoals)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.DateTime)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Edit", "EditMatch", new { id = item.MatchId }, new { @class = "btn btn-warning" })
-                            @Html.ActionLink("Close", "CloseMatch", new { id = item.MatchId }, new { @class = "btn btn-info" })
-                            @Html.ActionLink("Delete", "DeleteMatch", new { id = item.MatchId }, new { @class = "btn btn-danger", onclick = "return confirm('Are you sure to delete the team in this match?')" })
-                        </td>
-                    </tr>
-                }
-            </table>
-        }
-    </div>
-</div>
-
-
+    </table>
+}

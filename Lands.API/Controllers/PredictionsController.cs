@@ -12,7 +12,7 @@
     using Domain;
     using Models;
 
-    [Authorize]
+    //[Authorize]
     [RoutePrefix("api/Predictions")]
     public class PredictionsController : ApiController
     {
@@ -52,43 +52,32 @@
         public async Task<IHttpActionResult> GetRanking()
         {
             var responses = new List<Ranking>();
-            var predictions = await db.Predictions.Where(p => p.Points != null).ToListAsync();
-
-            var preRankings =  predictions.Select(p => new PreRanking
+            var boards = await db.Boards.ToListAsync();
+            foreach (var board in boards)
             {
-                BoardId = p.BoardId,
-                UserId = p.UserId,
-            }).ToList();
+                int points = 0;
 
-            preRankings = preRankings.OrderBy(p => p.UserId).ThenBy(p => p.BoardId).ToList();
-
-            int i = 0;
-            while (i < preRankings.Count)
-            {
-                var preUserId = preRankings[i].UserId;
-                var preBoard = preRankings[i].BoardId;
-                while (i < preRankings.Count &&
-                       preUserId == preRankings[i].UserId && 
-                       preBoard == preRankings[i].BoardId)
+                try
                 {
-                    i++;
+                    points = db.Predictions.
+                        Where(p => p.BoardId == board.BoardId && p.UserId == board.UserId).
+                        Sum(p => p.Points).
+                        Value;
+                }
+                catch
+                {
+                    points = 0;
                 }
 
-                var user = await db.Users.FindAsync(preUserId);
-                var board = await db.Boards.FindAsync(preBoard);
-                var points = predictions.
-                    Where(p => p.UserId == preUserId && p.BoardId == preBoard).
-                    Sum(p => p.Points);
                 responses.Add(new Ranking
                 {
                     Board = board,
-                    Points = points.Value,
-                    User = user,
+                    Points = points,
+                    User = board.User,
                 });
-
             }
 
-            i = 1;
+            var i = 1;
             foreach (var response in responses.OrderByDescending(p => p.Points))
             {
                 response.RankingId = i;
