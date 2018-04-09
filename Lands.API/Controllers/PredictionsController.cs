@@ -12,7 +12,7 @@
     using Domain;
     using Models;
 
-    //[Authorize]
+    [Authorize]
     [RoutePrefix("api/Predictions")]
     public class PredictionsController : ApiController
     {

@@ -29,6 +29,39 @@
                 notificationHubName);
         }
 
+        public async Task<ActionResult> ClosePredictions(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var match = await db.Matches.FindAsync(id);
+
+            if (match == null)
+            {
+                return HttpNotFound();
+            }
+
+            match.StatusMatchId = 3;
+            db.Entry(match).State = EntityState.Modified;
+            await db.SaveChangesAsync();
+
+            var tags = new List<string>();
+            var users = await db.Users.ToListAsync();
+            foreach (var user in users)
+            {
+                tags.Add(string.Format("userId:{0}", user.UserId));
+            }
+
+            if (tags.Count > 0)
+            {
+                await this.SendNotificationNoPoints(tags.Distinct().ToList(), match, "closePrediction");
+            }
+
+            return RedirectToAction(string.Format("Details/{0}", match.GroupId));
+        }
+
         public async Task<ActionResult> NotificateUsers(int? id)
         {
             if (id == null)
@@ -121,6 +154,9 @@
                     db.Entry(oldMatch).State = EntityState.Modified;
 
                     var statusMatch = this.GetStatus(oldMatch.LocalGoals.Value, oldMatch.VisitorGoals.Value);
+                    var tags3 = new List<string>();
+                    var tags1 = new List<string>();
+                    var tags0 = new List<string>();
 
                     // Update predictions
                     var predictions = await db.Predictions
@@ -133,6 +169,7 @@
                             prediction.VisitorGoals == oldMatch.VisitorGoals)
                         {
                             points = 3;
+                            tags3.Add(string.Format("userId:{0}", prediction.UserId));
                         }
                         else
                         {
@@ -140,6 +177,12 @@
                             if (statusMatch == statusPrediction)
                             {
                                 points = 1;
+                                tags1.Add(string.Format("userId:{0}", prediction.UserId));
+                            }
+                            else
+                            {
+                                points = 0;
+                                tags0.Add(string.Format("userId:{0}", prediction.UserId));
                             }
                         }
 
@@ -149,6 +192,21 @@
 
                     await db.SaveChangesAsync();
                     transacction.Commit();
+
+                    if (tags3.Count > 0)
+                    {
+                        await this.SendNotificationNoPoints(tags3.Distinct().ToList(), oldMatch, "points3");
+                    }
+
+                    if (tags1.Count > 0)
+                    {
+                        await this.SendNotificationNoPoints(tags1.Distinct().ToList(), oldMatch, "points1");
+                    }
+
+                    if (tags0.Count > 0)
+                    {
+                        await this.SendNotificationNoPoints(tags0.Distinct().ToList(), oldMatch, "points0");
+                    }
 
                     return RedirectToAction(string.Format("Details/{0}", oldMatch.GroupId));
                 }

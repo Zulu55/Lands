@@ -1,5 +1,7 @@
 ﻿namespace Lands.API.Models
 {
+    using Domain;
+
     public class PredictionResponse
     {
         public int PredictionId { get; set; }
@@ -15,6 +17,8 @@
         public int? Points { get; set; }
 
         public int UserId { get; set; }
+
+        public User User { get; set; }
 
         public MatchResponse Match { get; set; }
     }

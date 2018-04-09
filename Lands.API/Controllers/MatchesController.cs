@@ -1,6 +1,7 @@
 ﻿namespace Lands.API.Controllers
 {
-    using System;
+    using Domain;
+    using Models;
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
@@ -9,10 +10,7 @@
     using System.Threading.Tasks;
     using System.Web.Http;
     using System.Web.Http.Description;
-    using Domain;
-    using Models;
 
-    //[Authorize]
     [RoutePrefix("api/Matches")]
     public class MatchesController : ApiController
     {
@@ -33,10 +31,10 @@
                     {
                         BoardId = prediction.BoardId,
                         LocalGoals = prediction.LocalGoals,
-                        Match = this.ToMatchResponse(prediction.Match),
                         MatchId = prediction.MatchId,
                         Points = prediction.Points,
                         PredictionId = prediction.PredictionId,
+                        User = prediction.User,
                         UserId = prediction.UserId,
                         VisitorGoals = prediction.VisitorGoals,
                     });
@@ -71,8 +69,7 @@
             };
         }
 
-
-        // GET: api/Matches
+        [Authorize]
         public async Task<IHttpActionResult> GetMatches()
         {
             var resonse = new List<MatchResponse>();
@@ -98,20 +95,20 @@
             return Ok(resonse);
         }
 
-        // GET: api/Matches/5
-        [ResponseType(typeof(Match))]
-        public async Task<IHttpActionResult> GetMatch(int id)
-        {
-            Match match = await db.Matches.FindAsync(id);
-            if (match == null)
-            {
-                return NotFound();
-            }
+        //[Authorize]
+        //[ResponseType(typeof(Match))]
+        //public async Task<IHttpActionResult> GetMatch(int id)
+        //{
+        //    Match match = await db.Matches.FindAsync(id);
+        //    if (match == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return Ok(match);
-        }
+        //    return Ok(match);
+        //}
 
-        // PUT: api/Matches/5
+        [Authorize]
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> PutMatch(int id, Match match)
         {
@@ -146,7 +143,7 @@
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Matches
+        [Authorize]
         [ResponseType(typeof(Match))]
         public async Task<IHttpActionResult> PostMatch(Match match)
         {
@@ -161,21 +158,20 @@
             return CreatedAtRoute("DefaultApi", new { id = match.MatchId }, match);
         }
 
-        // DELETE: api/Matches/5
-        [ResponseType(typeof(Match))]
-        public async Task<IHttpActionResult> DeleteMatch(int id)
-        {
-            Match match = await db.Matches.FindAsync(id);
-            if (match == null)
-            {
-                return NotFound();
-            }
+        //[ResponseType(typeof(Match))]
+        //public async Task<IHttpActionResult> DeleteMatch(int id)
+        //{
+        //    Match match = await db.Matches.FindAsync(id);
+        //    if (match == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            db.Matches.Remove(match);
-            await db.SaveChangesAsync();
+        //    db.Matches.Remove(match);
+        //    await db.SaveChangesAsync();
 
-            return Ok(match);
-        }
+        //    return Ok(match);
+        //}
 
         protected override void Dispose(bool disposing)
         {
