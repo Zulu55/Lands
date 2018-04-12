@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Lands.Domain.Board>
+@{
+    ViewBag.Title = "Index";
+}
+<h2>Boards</h2>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Board Status
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User.ImagePath)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User.FullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ImagePath)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WasPayed)
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.BoardStatus.Name)
+        </td>
+        <td>
+            @if (!string.IsNullOrEmpty(item.User.ImagePath))
+            {
+                <img src="@Url.Content(item.User.ImageFullPath)" alt="Image" style="width:80px;height:80px;max-width: 100%; height: auto;" />
+            }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.FullName)
+        </td>
+        <td>
+            @if (!string.IsNullOrEmpty(item.ImagePath))
+        {
+            <img src="@Url.Content(item.ImageFullPath)" alt="Image" style="width:80px;height:80px;max-width: 100%; height: auto;" />
+    }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WasPayed)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.BoardId }) |
+            @Html.ActionLink("Details", "Details", new { id = item.BoardId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.BoardId })
+        </td>
+    </tr>
+    }
+</table>

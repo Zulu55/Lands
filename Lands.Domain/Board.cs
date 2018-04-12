@@ -17,6 +17,9 @@
         [Display(Name = "Image")]
         public string ImagePath { get; set; }
 
+        [Display(Name = "Was Payed?")]
+        public bool WasPayed { get; set; }
+
         [NotMapped]
         public byte[] ImageArray { get; set; }
 

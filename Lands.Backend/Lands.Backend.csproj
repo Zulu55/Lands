@@ -361,6 +361,7 @@
     <Content Include="Views\Predictions\Edit.cshtml" />
     <Content Include="Views\Predictions\Index.cshtml" />
     <Content Include="Views\Groups\CloseMatch.cshtml" />
+    <Content Include="Views\Boards\Index2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
