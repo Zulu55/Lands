@@ -7,7 +7,7 @@
 <h2>Teams</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create", new { }, new { @class = "btn btn-primary" })
 </p>
 <table class="table">
     <tr>
@@ -28,13 +28,13 @@
         <td>
             @if (!string.IsNullOrEmpty(item.ImagePath))
             {
-                <img src="@Url.Content(item.ImagePath)" alt="Image" style="width:150px;height:150px;max-width: 100%; height: auto;" />
+                <img src="@Url.Content(item.ImagePath)" alt="Image" style="width:80px;height:80px;max-width: 100%; height: auto;" />
             }
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.TeamId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.TeamId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.TeamId })
+            @Html.ActionLink("Edit", "Edit", new { id=item.TeamId }, new { @class = "btn btn-warning" })
+            @Html.ActionLink("Details", "Details", new { id=item.TeamId }, new { @class = "btn btn-info" })
+            @Html.ActionLink("Delete", "Delete", new { id=item.TeamId }, new { @class = "btn btn-danger" })
         </td>
     </tr>
 }

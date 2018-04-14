@@ -7,12 +7,18 @@
 <h2>Groups</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create", new { }, new { @class = "btn btn-primary" })
 </p>
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            # Teams
+        </th>
+        <th>
+            # Matches
         </th>
         <th></th>
     </tr>
@@ -23,9 +29,15 @@
             @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.GroupId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.GroupId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.GroupId })
+            @Html.DisplayFor(modelItem => item.GroupTeams.Count)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Matches.Count)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.GroupId }, new { @class = "btn btn-warning" })
+            @Html.ActionLink("Details", "Details", new { id = item.GroupId }, new { @class = "btn btn-info" })
+            @Html.ActionLink("Delete", "Delete", new { id = item.GroupId }, new { @class = "btn btn-danger" })
         </td>
     </tr>
 }

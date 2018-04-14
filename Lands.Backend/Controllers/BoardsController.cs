@@ -12,116 +12,116 @@ using Lands.Domain;
 
 namespace Lands.Backend.Controllers
 {
-    public class GroupTeamsController : Controller
+    public class BoardsController : Controller
     {
         private LocalDataContext db = new LocalDataContext();
 
-        // GET: GroupTeams
+        // GET: Boards
         public async Task<ActionResult> Index()
         {
-            var groupTeams = db.GroupTeams.Include(g => g.Group).Include(g => g.Team);
-            return View(await groupTeams.ToListAsync());
+            var boards = db.Boards.Include(b => b.BoardStatus).Include(b => b.User);
+            return View(await boards.ToListAsync());
         }
 
-        // GET: GroupTeams/Details/5
+        // GET: Boards/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            GroupTeam groupTeam = await db.GroupTeams.FindAsync(id);
-            if (groupTeam == null)
+            Board board = await db.Boards.FindAsync(id);
+            if (board == null)
             {
                 return HttpNotFound();
             }
-            return View(groupTeam);
+            return View(board);
         }
 
-        // GET: GroupTeams/Create
+        // GET: Boards/Create
         public ActionResult Create()
         {
-            ViewBag.GroupId = new SelectList(db.Groups, "GroupId", "Name");
-            ViewBag.TeamId = new SelectList(db.Teams, "TeamId", "Name");
+            ViewBag.BoardStatusId = new SelectList(db.BoardStatus, "BoardStatusId", "Name");
+            ViewBag.UserId = new SelectList(db.Users, "UserId", "FirstName");
             return View();
         }
 
-        // POST: GroupTeams/Create
+        // POST: Boards/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "GroupTeamId,GroupId,TeamId")] GroupTeam groupTeam)
+        public async Task<ActionResult> Create([Bind(Include = "BoardId,BoardStatusId,UserId,ImagePath,WayPayed")] Board board)
         {
             if (ModelState.IsValid)
             {
-                db.GroupTeams.Add(groupTeam);
+                db.Boards.Add(board);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.GroupId = new SelectList(db.Groups, "GroupId", "Name", groupTeam.GroupId);
-            ViewBag.TeamId = new SelectList(db.Teams, "TeamId", "Name", groupTeam.TeamId);
-            return View(groupTeam);
+            ViewBag.BoardStatusId = new SelectList(db.BoardStatus, "BoardStatusId", "Name", board.BoardStatusId);
+            ViewBag.UserId = new SelectList(db.Users, "UserId", "FirstName", board.UserId);
+            return View(board);
         }
 
-        // GET: GroupTeams/Edit/5
+        // GET: Boards/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            GroupTeam groupTeam = await db.GroupTeams.FindAsync(id);
-            if (groupTeam == null)
+            Board board = await db.Boards.FindAsync(id);
+            if (board == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.GroupId = new SelectList(db.Groups, "GroupId", "Name", groupTeam.GroupId);
-            ViewBag.TeamId = new SelectList(db.Teams, "TeamId", "Name", groupTeam.TeamId);
-            return View(groupTeam);
+            ViewBag.BoardStatusId = new SelectList(db.BoardStatus, "BoardStatusId", "Name", board.BoardStatusId);
+            ViewBag.UserId = new SelectList(db.Users, "UserId", "FirstName", board.UserId);
+            return View(board);
         }
 
-        // POST: GroupTeams/Edit/5
+        // POST: Boards/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "GroupTeamId,GroupId,TeamId")] GroupTeam groupTeam)
+        public async Task<ActionResult> Edit([Bind(Include = "BoardId,BoardStatusId,UserId,ImagePath,WayPayed")] Board board)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(groupTeam).State = EntityState.Modified;
+                db.Entry(board).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.GroupId = new SelectList(db.Groups, "GroupId", "Name", groupTeam.GroupId);
-            ViewBag.TeamId = new SelectList(db.Teams, "TeamId", "Name", groupTeam.TeamId);
-            return View(groupTeam);
+            ViewBag.BoardStatusId = new SelectList(db.BoardStatus, "BoardStatusId", "Name", board.BoardStatusId);
+            ViewBag.UserId = new SelectList(db.Users, "UserId", "FirstName", board.UserId);
+            return View(board);
         }
 
-        // GET: GroupTeams/Delete/5
+        // GET: Boards/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            GroupTeam groupTeam = await db.GroupTeams.FindAsync(id);
-            if (groupTeam == null)
+            Board board = await db.Boards.FindAsync(id);
+            if (board == null)
             {
                 return HttpNotFound();
             }
-            return View(groupTeam);
+            return View(board);
         }
 
-        // POST: GroupTeams/Delete/5
+        // POST: Boards/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            GroupTeam groupTeam = await db.GroupTeams.FindAsync(id);
-            db.GroupTeams.Remove(groupTeam);
+            Board board = await db.Boards.FindAsync(id);
+            db.Boards.Remove(board);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

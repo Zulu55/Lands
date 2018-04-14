@@ -17,5 +17,8 @@
 
         [JsonIgnore]
         public virtual ICollection<GroupTeam> GroupTeams { get; set; }
+
+        [JsonIgnore]
+        public virtual ICollection<Match> Matches { get; set; }
     }
 }

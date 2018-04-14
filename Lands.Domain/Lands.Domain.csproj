@@ -50,10 +50,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Board.cs" />
+    <Compile Include="BoardStatus.cs" />
     <Compile Include="DataContext.cs" />
     <Compile Include="Group.cs" />
     <Compile Include="GroupTeam.cs" />
+    <Compile Include="Match.cs" />
+    <Compile Include="MatchesMap.cs" />
+    <Compile Include="Prediction.cs" />
     <Compile Include="Response.cs" />
+    <Compile Include="StatusMatch.cs" />
     <Compile Include="Team.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

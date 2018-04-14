@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Lands.Domain.Prediction>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Board.ImagePath)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Match.MatchId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LocalGoals)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VisitorGoals)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Points)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Board.ImagePath)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Match.MatchId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LocalGoals)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VisitorGoals)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Points)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.PredictionId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PredictionId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PredictionId })
+        </td>
+    </tr>
+}
+
+</table>
